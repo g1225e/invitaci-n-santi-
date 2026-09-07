@@ -5,11 +5,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nuestra Boda</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 <body>
+<!-- ===== PANTALLA 1: LA CARTA (no scrolleable) ===== -->
+<div id="carta" class="pantalla-carta">
+    <div class="sobre">
+        <div class="sello" id="sello">
+            <!-- Aquí luego puede ir una inicial, ej. "S&N" -->
+            S&amp;C
+        </div>
+        <p class="instruccion">Toca el sello para abrir</p>
+    </div>
+</div>
 
-    <!-- Aquí van todas las secciones -->
-     <h1>Hola madre, si ves esto la página funciona, saludos a Patricia</h1>
+<!-- ===== PANTALLA 2: INVITACIÓN (scrolleable) ===== -->
+<div id="invitacion" class="pantalla-invitacion">
 
+    <!-- PORTADA -->
+    <section id="portada">
+        <h1>Carolina &amp; Santiago</h1>
+        <p>Nos casamos</p>
+    </section>
+
+    <!-- HISTORIA -->
+    <section id="historia">
+        <h2>Nuestra historia</h2>
+        <p>Aquí va un texto breve sobre cómo se conocieron.</p>
+    </section>
+
+    <!-- DETALLES -->
+    <section id="detalles">
+        <h2>Detalles</h2>
+        <div>
+            <h3>Ceremonia</h3>
+            <p>Fecha, hora y lugar</p>
+        </div>
+        <div>
+            <h3>Recepción</h3>
+            <p>Fecha, hora y lugar</p>
+        </div>
+    </section>
+
+    <!-- GALERÍA -->
+    <section id="galeria">
+        <h2>Galería</h2>
+        <!-- Fotos van aquí después -->
+    </section>
+
+    <!-- RSVP -->
+    <section id="rsvp">
+        <h2>Confirma tu asistencia</h2>
+        <!-- Formulario va aquí después -->
+    </section>
+
+</div>
+<script src="js/script.js"></script>
 </body>
 </html>
