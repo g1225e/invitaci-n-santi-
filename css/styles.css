@@ -219,3 +219,155 @@ body {
 .mensaje-rsvp.error {
     color: #B0342C;
 }
+
+.btn-mapa {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.7rem 1.5rem;
+    background-color: var(--color-acento);
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-family: var(--fuente-cuerpo);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+}
+
+.btn-mapa:hover {
+    background-color: var(--color-primario);
+}
+
+.mapa-embebido {
+    width: 100%;
+    max-width: 500px;
+    margin: 1.5rem 0;
+    border-radius: 10px;
+    overflow: hidden; /* para que las esquinas redondeadas también recorten el iframe */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.mapa-embebido iframe {
+    display: block; /* elimina un pequeño espacio raro que dejan los iframes por defecto */
+}
+
+/* ===== DRESS CODE ===== */
+.dresscode-tipo {
+    font-family: var(--fuente-titulo);
+    font-size: 1.5rem;
+    font-style: italic;
+    color: var(--color-primario);
+    margin-bottom: 2rem;
+}
+
+.dresscode-grid {
+    display: flex;
+    gap: 3rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.dresscode-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dresscode-icono {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.dresscode-item h3 {
+    font-family: var(--fuente-titulo);
+    font-size: 1.1rem;
+    margin-bottom: 0.3rem;
+}
+
+.dresscode-restriccion {
+    font-size: 0.9rem;
+    font-style: italic;
+    color: var(--color-acento);
+    border: 1px solid var(--color-acento);
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    display: inline-block;
+}
+
+/* ===== MENSAJE DE LOS NOVIOS ===== */
+#mensaje {
+    background-color: var(--color-fondo);
+}
+
+.comillas {
+    font-family: var(--fuente-titulo);
+    font-size: 5rem;
+    color: var(--color-secundario);
+    line-height: 1;
+    margin-bottom: -1rem;
+}
+
+.mensaje-texto {
+    font-family: var(--fuente-titulo);
+    font-style: italic;
+    font-size: 1.3rem;
+    max-width: 500px;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.mensaje-referencia {
+    font-family: var(--fuente-cuerpo);
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--color-primario);
+}
+
+/* ===== ITINERARIO ===== */
+.itinerario {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2.5rem;
+    margin-bottom: 3rem;
+}
+
+.itinerario-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 110px;
+}
+
+.itinerario-icono {
+    width: 42px;
+    height: 42px;
+    color: var(--color-primario);
+    margin-bottom: 0.8rem;
+}
+
+.itinerario-item h3 {
+    font-family: var(--fuente-titulo);
+    font-size: 1.1rem;
+    margin-bottom: 0.2rem;
+}
+
+.itinerario-item p {
+    font-size: 0.85rem;
+    color: var(--color-texto);
+    opacity: 0.75;
+}
+
+.ubicacion-detalle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.ubicacion-nombre {
+    font-family: var(--fuente-titulo);
+    font-size: 1.2rem;
+    margin-bottom: 0.3rem;
+}

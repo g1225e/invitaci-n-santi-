@@ -55,18 +55,108 @@
         <p>Aquí va un texto breve sobre cómo se conocieron.</p>
     </section>
 
-    <!-- DETALLES -->
-    <section id="detalles">
-        <h2>Detalles</h2>
-        <div>
+    <!-- MENSAJE DE LOS NOVIOS -->
+<section id="mensaje">
+    <span class="comillas">&rdquo;</span>
+    <h2>Mensaje de los novios</h2>
+    <p class="mensaje-texto">
+        El matrimonio es un pacto bendecido por Dios.
+        «Así que ya no son dos, sino una sola carne.
+        Por tanto, lo que Dios ha unido,
+        que no lo separe el hombre.»
+    </p>
+    <p class="mensaje-referencia">Mateo 19:6</p>
+</section>
+
+<!-- DETALLES / ITINERARIO -->
+<section id="detalles">
+    <h2>Itinerario</h2>
+
+    <div class="itinerario">
+        <div class="itinerario-item">
+            <svg class="itinerario-icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                <path d="M12 2v4M8 6h8l-1 5a3 3 0 0 1-6 0L8 6z"/>
+                <path d="M12 13v6M9 21h6"/>
+            </svg>
+            <h3>Entrada</h3>
+            <p>3:00 PM</p>
+        </div>
+
+        <div class="itinerario-item">
+            <svg class="itinerario-icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                <path d="M12 3l2.5 5 5.5.7-4 4 1 5.5-5-2.7-5 2.7 1-5.5-4-4 5.5-.7z"/>
+            </svg>
             <h3>Ceremonia</h3>
-            <p>Fecha, hora y lugar</p>
+            <p>4:00 PM</p>
         </div>
-        <div>
-            <h3>Recepción</h3>
-            <p>Fecha, hora y lugar</p>
+
+        <div class="itinerario-item">
+            <svg class="itinerario-icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                <path d="M4 10c0-3 3.5-7 8-7s8 4 8 7"/>
+                <path d="M3 10h18l-1.5 9h-15z"/>
+                <path d="M9 10v9M15 10v9"/>
+            </svg>
+            <h3>Cena</h3>
+            <p>5:00 PM</p>
         </div>
-    </section>
+
+        <div class="itinerario-item">
+            <svg class="itinerario-icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                <circle cx="12" cy="12" r="7"/>
+                <path d="M12 5v14M5 12h14M7 7l10 10M17 7L7 17"/>
+            </svg>
+            <h3>Fiesta</h3>
+            <p>7:00 PM</p>
+        </div>
+    </div>
+
+    <div class="ubicacion-detalle">
+        <p class="ubicacion-nombre">Hacienda San Sebastián</p>
+        <p>Subachoque-El Rosal Km 3, El Rosal, Cundinamarca</p>
+
+        <div class="mapa-embebido">
+            <iframe
+                src="https://www.google.com/maps?q=4.8666936,-74.23508679999999&z=15&output=embed"
+                width="100%"
+                height="300"
+                style="border:0;"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+
+        <a href="https://www.google.com/maps/search/?api=1&query=4.8666936,-74.23508679999999"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="btn-mapa">
+            📍 Abrir en Google Maps
+        </a>
+    </div>
+</section>
+
+<!-- DRESS CODE -->
+<section id="dresscode">
+    <h2>Dress Code</h2>
+    <p class="dresscode-tipo">Etiqueta</p>
+
+    <div class="dresscode-grid">
+        <div class="dresscode-item">
+            <span class="dresscode-icono">👗</span>
+            <h3>Mujeres</h3>
+            <p>Vestido largo</p>
+        </div>
+        <div class="dresscode-item">
+            <span class="dresscode-icono">🤵</span>
+            <h3>Hombres</h3>
+            <p>Etiqueta</p>
+        </div>
+    </div>
+
+    <p class="dresscode-restriccion">
+        Se reserva el color blanco
+    </p>
+</section>
 
     <!-- GALERÍA -->
     <section id="galeria">
