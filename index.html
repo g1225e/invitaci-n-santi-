@@ -75,10 +75,17 @@
     </section>
 
     <!-- RSVP -->
-    <section id="rsvp">
-        <h2>Confirma tu asistencia</h2>
-        <!-- Formulario va aquí después -->
-    </section>
+<section id="rsvp">
+    <h2>Confirma tu asistencia</h2>
+
+    <form id="form-rsvp" class="form-rsvp">
+        <input type="text" id="nombre" name="nombre" placeholder="Nombre" required>
+        <input type="text" id="apellido" name="apellido" placeholder="Apellido" required>
+        <button type="submit">Confirmar asistencia</button>
+    </form>
+
+    <p id="mensaje-rsvp" class="mensaje-rsvp"></p>
+</section>
 
 </div>
 <script src="js/script.js"></script>

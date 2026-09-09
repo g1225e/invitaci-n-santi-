@@ -22,7 +22,52 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 800);
     });
 
-});
+        // ===== FORMULARIO RSVP =====
+
+    const URL_SCRIPT = 'https://script.google.com/macros/s/AKfycbz8C_rmtfn-2Q9NRt363q7vU-I3ceACKdj5RPwLo2s5-Ag1OzmcTuaGKCM09SeYYr8t/exec';
+
+    const formRsvp = document.getElementById('form-rsvp');
+    const mensajeRsvp = document.getElementById('mensaje-rsvp');
+
+    formRsvp.addEventListener('submit', async (evento) => {
+        // Evita que el formulario recargue la página (comportamiento por defecto de un <form>)
+        evento.preventDefault();
+
+        const nombre = document.getElementById('nombre').value.trim();
+        const apellido = document.getElementById('apellido').value.trim();
+
+        const boton = formRsvp.querySelector('button');
+        boton.disabled = true;
+        boton.textContent = 'Enviando...';
+        mensajeRsvp.textContent = '';
+        mensajeRsvp.className = 'mensaje-rsvp';
+
+        try {
+            await fetch(URL_SCRIPT, {
+                method: 'POST',
+                mode: 'no-cors', // necesario para Apps Script; ver explicación abajo
+                headers: {
+                    'Content-Type': 'text/plain',
+                },
+                body: JSON.stringify({ nombre, apellido }),
+            });
+
+            // Como 'no-cors' no nos deja leer la respuesta real,
+            // asumimos éxito si fetch no lanzó un error de red
+            mensajeRsvp.textContent = `¡Gracias ${nombre}! Tu asistencia fue confirmada.`;
+            mensajeRsvp.classList.add('exito');
+            formRsvp.reset();
+
+        } catch (error) {
+            mensajeRsvp.textContent = 'Hubo un problema al enviar. Intenta de nuevo.';
+            mensajeRsvp.classList.add('error');
+            console.error(error);
+
+        } finally {
+            boton.disabled = false;
+            boton.textContent = 'Confirmar asistencia';
+        }
+    });
 
     // ===== COUNTDOWN =====
 
@@ -62,3 +107,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Y luego repetir cada 1000ms (1 segundo)
     const intervalo = setInterval(actualizarCountdown, 1000);
+});
+
+    
