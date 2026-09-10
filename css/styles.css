@@ -228,6 +228,7 @@ img {
     background-color: var(--color-primario);
     color: white;
     padding: 0.8rem 0.5rem;
+    margin: 5px;
     border-radius: 8px;
 }
 
