@@ -9,6 +9,9 @@
     --fuente-titulo: 'Playfair Display', serif;
     --fuente-cuerpo: 'Montserrat', sans-serif;
 }
+html {
+    color-scheme: light only;
+}
 
 /* ===== RESET BÁSICO ===== */
 * {
