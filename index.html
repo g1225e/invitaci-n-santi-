@@ -4,212 +4,250 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nuestra Boda</title>
-    <link rel="stylesheet" href="css/styles.css">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-<!-- ===== PANTALLA 1: LA CARTA (no scrolleable) ===== -->
-<div id="carta" class="pantalla-carta">
-    <div class="sobre">
-        <div class="sello" id="sello">
-            <!-- Aquí luego puede ir una inicial, ej. "S&N" -->
-            S&amp;C
+
+    <!-- ===== PANTALLA 1: LA CARTA (no scrolleable) ===== -->
+    <div id="carta" class="pantalla-carta">
+        <div class="sobre">
+            <div class="sello" id="sello">S&amp;N</div>
+            <p class="instruccion">Toca el sello para abrir</p>
         </div>
-        <p class="instruccion">Toca el sello para abrir</p>
-    </div>
-</div>
-
-<!-- ===== PANTALLA 2: INVITACIÓN (scrolleable) ===== -->
-<div id="invitacion" class="pantalla-invitacion">
-
-<!-- PORTADA -->
-<section id="portada">
-    <div class="slideshow-bg">
-        <div class="slide activa" style="background-image: url('assets/portada1.jpg');"></div>
-        <div class="slide" style="background-image: url('assets/portada2.jpg');"></div>
-        <div class="slide" style="background-image: url('assets/portada3.jpg');"></div>
-        <div class="slide" style="background-image: url('assets/portada4.jpg');"></div>
-        <div class="slide" style="background-image: url('assets/portada5.jpg');"></div>
-        <div class="slideshow-overlay"></div>
     </div>
 
-    <div class="portada-contenido">
-        <h1>Carolina &amp; Santiago</h1>
-        <p class="fecha-dia">Nos casamos</p>
+    <!-- ===== PANTALLA 2: INVITACIÓN (scrolleable) ===== -->
+    <div id="invitacion" class="pantalla-invitacion">
 
-        <div class="fecha-evento">
-            <p class="fecha-dia">Miércoles 7 de abril de 2027</p>
-            <p class="fecha-hora">3:00 PM</p>
-        </div>
-
-        <div id="countdown" class="countdown">
-            <div class="countdown-item">
-                <span id="dias">00</span>
-                <small>Días</small>
+        <!-- PORTADA -->
+        <section id="portada">
+            <div class="slideshow-bg">
+                <div class="slide activa" style="background-image: url('assets/portada1.jpg');"></div>
+                <div class="slide" style="background-image: url('assets/portada2.jpg');"></div>
+                <div class="slide" style="background-image: url('assets/portada3.jpg');"></div>
+                <div class="slide" style="background-image: url('assets/portada4.jpg');"></div>
+                <div class="slide" style="background-image: url('assets/portada5.jpg');"></div>
+                <div class="slideshow-overlay"></div>
             </div>
-            <div class="countdown-item">
-                <span id="horas">00</span>
-                <small>Horas</small>
+
+            <div class="container portada-contenido">
+                <h1>Nombre &amp; Nombre</h1>
+                <p>Nos casamos</p>
+
+                <div class="fecha-evento">
+                    <p class="fecha-dia">Miércoles 7 de abril de 2027</p>
+                    <p class="fecha-hora">3:00 PM</p>
+                </div>
+
+                <div id="countdown" class="countdown row justify-content-center g-2 g-sm-3">
+                    <div class="countdown-item col-3 col-sm-auto">
+                        <span id="dias">00</span>
+                        <small>Días</small>
+                    </div>
+                    <div class="countdown-item col-3 col-sm-auto">
+                        <span id="horas">00</span>
+                        <small>Horas</small>
+                    </div>
+                    <div class="countdown-item col-3 col-sm-auto">
+                        <span id="minutos">00</span>
+                        <small>Min</small>
+                    </div>
+                    <div class="countdown-item col-3 col-sm-auto">
+                        <span id="segundos">00</span>
+                        <small>Seg</small>
+                    </div>
+                </div>
             </div>
-            <div class="countdown-item">
-                <span id="minutos">00</span>
-                <small>Min</small>
+        </section>
+
+        <!-- HISTORIA -->
+        <section id="historia">
+            <div class="polaroid polaroid-1" data-velocidad="0.15">
+                <img src="assets/galeria1.jpeg" alt="Nosotros">
             </div>
-            <div class="countdown-item">
-                <span id="segundos">00</span>
-                <small>Seg</small>
+            <div class="polaroid polaroid-2" data-velocidad="0.3">
+                <img src="assets/galeria2.jpeg" alt="Nosotros">
             </div>
-        </div>
+
+            <div class="container">
+                <div class="historia-texto mx-auto">
+                    <h2>Nuestra historia</h2>
+                    <p>Aquí va un texto breve sobre cómo se conocieron.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- MENSAJE DE LOS NOVIOS -->
+        <section id="mensaje">
+            <div class="container">
+                <span class="comillas">&rdquo;</span>
+                <h2>Mensaje de los novios</h2>
+                <p class="mensaje-texto mx-auto">
+                    El matrimonio es un pacto bendecido por Dios.
+                    «Así que ya no son dos, sino una sola carne.
+                    Por tanto, lo que Dios ha unido,
+                    que no lo separe el hombre.»
+                </p>
+                <p class="mensaje-referencia">Mateo 19:6</p>
+            </div>
+        </section>
+
+        <!-- DETALLES / ITINERARIO -->
+        <section id="detalles">
+            <div class="container">
+                <h2>Itinerario</h2>
+
+                <div class="itinerario row justify-content-center g-4">
+                    <div class="itinerario-item col-6 col-sm-3">
+                        <svg class="itinerario-icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                            <path d="M14 3v18l-9-2V5z"/>
+                            <path d="M14 3h6v18h-6"/>
+                            <circle cx="10.5" cy="12" r="0.8" fill="currentColor" stroke="none"/>
+                        </svg>
+                        <h3>Entrada</h3>
+                        <p>3:00 PM</p>
+                    </div>
+
+                    <div class="itinerario-item col-6 col-sm-3">
+                        <svg class="itinerario-icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                            <circle cx="9" cy="14" r="5"/>
+                            <circle cx="15" cy="14" r="5"/>
+                            <path d="M9 4l1.5 4M15 4l-1.5 4"/>
+                        </svg>
+                        <h3>Ceremonia</h3>
+                        <p>4:00 PM</p>
+                    </div>
+
+                    <div class="itinerario-item col-6 col-sm-3">
+                        <svg class="itinerario-icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                            <path d="M6 3v4a3 3 0 0 0 6 0V3"/>
+                            <path d="M9 7v14"/>
+                            <path d="M16 3v6a2 2 0 0 0 4 0V3"/>
+                            <path d="M18 9v12"/>
+                        </svg>
+                        <h3>Cena</h3>
+                        <p>5:00 PM</p>
+                    </div>
+
+                    <div class="itinerario-item col-6 col-sm-3">
+                        <svg class="itinerario-icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                            <path d="M8 3h8l-1 6a3 3 0 0 1-6 0z"/>
+                            <path d="M12 9v10M9 19h6"/>
+                            <circle cx="10" cy="5.5" r="0.4" fill="currentColor" stroke="none"/>
+                            <circle cx="13" cy="6.5" r="0.4" fill="currentColor" stroke="none"/>
+                        </svg>
+                        <h3>Fiesta</h3>
+                        <p>7:00 PM - 2:00 AM</p>
+                    </div>
+                </div>
+
+                <div class="ubicacion-detalle">
+                    <p class="ubicacion-nombre">Hacienda San Sebastián</p>
+                    <p>Subachoque-El Rosal Km 3, El Rosal, Cundinamarca</p>
+
+                    <div class="mapa-embebido mx-auto">
+                        <iframe
+                            src="https://www.google.com/maps?q=4.8666936,-74.23508679999999&z=15&output=embed"
+                            width="100%"
+                            height="300"
+                            style="border:0;"
+                            allowfullscreen=""
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+
+                    <a href="https://www.google.com/maps/search/?api=1&query=4.8666936,-74.23508679999999"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="btn-mapa">
+                        📍 Abrir en Google Maps
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- DRESS CODE -->
+        <section id="dresscode">
+            <div class="container">
+                <h2>Dress Code</h2>
+                <p class="dresscode-tipo">Etiqueta</p>
+
+                <div class="dresscode-grid row justify-content-center g-4">
+                    <div class="dresscode-item col-6 col-sm-4">
+                        <span class="dresscode-icono">👗</span>
+                        <h3>Mujeres</h3>
+                        <p>Vestido largo</p>
+                    </div>
+                    <div class="dresscode-item col-6 col-sm-4">
+                        <span class="dresscode-icono">🤵</span>
+                        <h3>Hombres</h3>
+                        <p>Etiqueta</p>
+                    </div>
+                </div>
+
+                <p class="dresscode-restriccion">Se reserva el color blanco</p>
+            </div>
+        </section>
+
+        <!-- GALERÍA -->
+        <section id="galeria">
+            <div class="container">
+                <h2>Galería</h2>
+                <div class="row g-3 justify-content-center">
+                    <div class="col-6 col-md-4">
+                        <img src="assets/galeria3.jpeg" class="img-galeria" alt="Galería">
+                    </div>
+                    <div class="col-6 col-md-4">
+                        <img src="assets/galeria4.jpeg" class="img-galeria" alt="Galería">
+                    </div>
+                    <div class="col-6 col-md-4">
+                        <img src="assets/galeria5.jpeg" class="img-galeria" alt="Galería">
+                    </div>
+                    <div class="col-6 col-md-4">
+                        <img src="assets/galeria6.jpeg" class="img-galeria" alt="Galería">
+                    </div>
+                    <div class="col-6 col-md-4">
+                        <img src="assets/galeria7.jpeg" class="img-galeria" alt="Galería">
+                    </div>
+                    <div class="col-6 col-md-4">
+                        <img src="assets/galeria8.jpeg" class="img-galeria" alt="Galería">
+                    </div>
+                    <div class="col-6 col-md-4">
+                        <img src="assets/galeria9.jpeg" class="img-galeria" alt="Galería">
+                    </div>
+                    <div class="col-6 col-md-4">
+                        <img src="assets/galeria10.jpeg" class="img-galeria" alt="Galería">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RSVP -->
+        <section id="rsvp">
+            <div class="container">
+                <h2>Confirma tu asistencia</h2>
+
+                <form id="form-rsvp" class="form-rsvp mx-auto">
+                    <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre" required>
+                    <input type="text" id="apellido" name="apellido" class="form-control" placeholder="Apellido" required>
+                    <button type="submit" class="btn-rsvp">Confirmar asistencia</button>
+                </form>
+
+                <p id="mensaje-rsvp" class="mensaje-rsvp"></p>
+            </div>
+        </section>
+
     </div>
-</section>
-    </section>
 
-    <!-- HISTORIA -->
-<section id="historia">
-    <div class="polaroid polaroid-1" data-velocidad="0.15">
-        <img src="assets/galeria1.jpeg" alt="Nosotros">
-    </div>
-    <div class="polaroid polaroid-2" data-velocidad="0.3">
-        <img src="assets/galeria2.jpeg" alt="Nosotros">
-    </div>
-
-    <div class="historia-texto">
-        <h2>Nuestra historia</h2>
-        <p>Aquí va un texto breve sobre cómo se conocieron.</p>
-    </div>
-</section>
-
-    <!-- MENSAJE DE LOS NOVIOS -->
-<section id="mensaje">
-    <span class="comillas">&rdquo;</span>
-    <h2>Mensaje de los novios</h2>
-    <p class="mensaje-texto">
-        El matrimonio es un pacto bendecido por Dios.
-        «Así que ya no son dos, sino una sola carne.
-        Por tanto, lo que Dios ha unido,
-        que no lo separe el hombre.»
-    </p>
-    <p class="mensaje-referencia">Mateo 19:6</p>
-</section>
-
-<!-- DETALLES / ITINERARIO -->
-<section id="detalles">
-    <h2>Itinerario</h2>
-
-    <div class="itinerario">
-        <div class="itinerario-item">
-            <svg class="itinerario-icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-    <path d="M14 3v18l-9-2V5z"/>
-    <path d="M14 3h6v18h-6"/>
-    <circle cx="10.5" cy="12" r="0.8" fill="currentColor" stroke="none"/>
-</svg>
-            <h3>Entrada</h3>
-            <p>3:00 PM</p>
-        </div>
-
-        <div class="itinerario-item">
-            <svg class="itinerario-icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-    <circle cx="9" cy="14" r="5"/>
-    <circle cx="15" cy="14" r="5"/>
-    <path d="M9 4l1.5 4M15 4l-1.5 4"/>
-</svg>
-            <h3>Ceremonia</h3>
-            <p>4:00 PM</p>
-        </div>
-
-        <div class="itinerario-item">
-            <svg class="itinerario-icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-    <path d="M6 3v4a3 3 0 0 0 6 0V3"/>
-    <path d="M9 7v14"/>
-    <path d="M16 3v6a2 2 0 0 0 4 0V3"/>
-    <path d="M18 9v12"/>
-</svg>
-            <h3>Cena</h3>
-            <p>5:00 PM</p>
-        </div>
-
-        <div class="itinerario-item">
-            <svg class="itinerario-icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-    <path d="M8 3h8l-1 6a3 3 0 0 1-6 0z"/>
-    <path d="M12 9v10M9 19h6"/>
-    <circle cx="10" cy="5.5" r="0.4" fill="currentColor" stroke="none"/>
-    <circle cx="13" cy="6.5" r="0.4" fill="currentColor" stroke="none"/>
-</svg>
-            <h3>Fiesta</h3>
-            <p>7:00 PM/2:00 AM</p>
-        </div>
-    </div>
-
-    <div class="ubicacion-detalle">
-        <p class="ubicacion-nombre">Hacienda San Sebastián</p>
-        <p>Subachoque-El Rosal Km 3, El Rosal, Cundinamarca</p>
-
-        <div class="mapa-embebido">
-            <iframe
-                src="https://www.google.com/maps?q=4.8666936,-74.23508679999999&z=15&output=embed"
-                width="100%"
-                height="300"
-                style="border:0;"
-                allowfullscreen=""
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
-        </div>
-
-        <a href="https://www.google.com/maps/search/?api=1&query=4.8666936,-74.23508679999999"
-           target="_blank"
-           rel="noopener noreferrer"
-           class="btn-mapa">
-            📍 Abrir en Google Maps
-        </a>
-    </div>
-</section>
-
-<!-- DRESS CODE -->
-<section id="dresscode">
-    <h2>Dress Code</h2>
-    <p class="dresscode-tipo">Etiqueta</p>
-
-    <div class="dresscode-grid">
-        <div class="dresscode-item">
-            <span class="dresscode-icono">👗</span>
-            <h3>Mujeres</h3>
-            <p>Vestido largo</p>
-        </div>
-        <div class="dresscode-item">
-            <span class="dresscode-icono">🤵</span>
-            <h3>Hombres</h3>
-            <p>Etiqueta</p>
-        </div>
-    </div>
-
-    <p class="dresscode-restriccion">
-        Se reserva el color blanco
-    </p>
-</section>
-
-    <!-- GALERÍA -->
-    <section id="galeria">
-        <h2>Galería</h2>
-        <!-- Fotos van aquí después -->
-    </section>
-
-    <!-- RSVP -->
-<section id="rsvp">
-    <h2>Confirma tu asistencia</h2>
-
-    <form id="form-rsvp" class="form-rsvp">
-        <input type="text" id="nombre" name="nombre" placeholder="Nombre" required>
-        <input type="text" id="apellido" name="apellido" placeholder="Apellido" required>
-        <button type="submit">Confirmar asistencia</button>
-    </form>
-
-    <p id="mensaje-rsvp" class="mensaje-rsvp"></p>
-</section>
-
-</div>
-<script src="js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
