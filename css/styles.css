@@ -371,3 +371,114 @@ body {
     font-size: 1.2rem;
     margin-bottom: 0.3rem;
 }
+
+.fecha-evento {
+    margin: 1.5rem 0;
+    text-align: center;
+}
+
+.fecha-dia {
+    font-family: var(--fuente-titulo);
+    font-size: 1.3rem;
+    color: var(--color-primario);
+}
+
+.fecha-hora {
+    font-size: 1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.75;
+    margin-top: 0.2rem;
+}
+
+/* ===== SLIDESHOW DE FONDO (PORTADA) ===== */
+#portada {
+    position: relative;
+    overflow: hidden;
+    color: white; /* texto blanco para que resalte sobre las fotos */
+}
+
+.slideshow-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+}
+
+.slide.activa {
+    opacity: 1;
+}
+
+.slideshow-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.35); /* oscurece un poco la foto para que el texto blanco resalte */
+}
+
+.portada-contenido {
+    position: relative;
+    z-index: 1;
+}
+
+.fecha-dia {
+    color: white; /* sobreescribe el color-primario que usábamos antes, ahora es sobre foto */
+}
+
+
+/* ===== POLAROIDS FLOTANTES ===== */
+#historia {
+    position: relative;
+    overflow: hidden;
+}
+
+.polaroid {
+    position: absolute;
+    background-color: white;
+    padding: 12px 12px 40px 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    width: 180px;
+    z-index: 2;
+    will-change: transform;
+}
+
+.polaroid img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+}
+
+.polaroid-1 {
+    top: 10%;
+    left: 8%;
+    transform: rotate(-8deg);
+}
+
+.polaroid-2 {
+    bottom: 12%;
+    right: 8%;
+    transform: rotate(6deg);
+}
+
+.historia-texto {
+    position: relative;
+    z-index: 1;
+    max-width: 500px;
+}

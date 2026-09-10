@@ -107,6 +107,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Y luego repetir cada 1000ms (1 segundo)
     const intervalo = setInterval(actualizarCountdown, 1000);
+
+        // ===== SLIDESHOW DE FONDO =====
+
+    const slides = document.querySelectorAll('.slide');
+    let slideActual = 0;
+
+    function siguienteSlide() {
+        slides[slideActual].classList.remove('activa');
+        slideActual = (slideActual + 1) % slides.length; // vuelve a 0 al llegar al final
+        slides[slideActual].classList.add('activa');
+    }
+
+    setInterval(siguienteSlide, 4000); // cambia cada 4 segundos
+
+        // ===== PARALLAX POLAROIDS =====
+
+    const polaroids = document.querySelectorAll('.polaroid');
+    const seccionHistoria = document.getElementById('historia');
+
+    window.addEventListener('scroll', () => {
+        const scrollY = window.scrollY;
+        const inicioSeccion = seccionHistoria.offsetTop;
+
+        polaroids.forEach((polaroid) => {
+            const velocidad = parseFloat(polaroid.dataset.velocidad);
+            // Calculamos cuánto ha scrolleado el usuario DENTRO de esta sección
+            const desplazamiento = (scrollY - inicioSeccion) * velocidad;
+            polaroid.style.transform = `translateY(${desplazamiento}px) ${polaroid.classList.contains('polaroid-1') ? 'rotate(-8deg)' : 'rotate(6deg)'}`;
+        });
+    });
 });
 
     
