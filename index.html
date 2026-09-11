@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="color-scheme" content="light">
     <title>Nuestra Boda</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -39,31 +38,18 @@
             </div>
 
             <div class="container portada-contenido">
-                <h1 class="fecha-dia">Carolina &amp; Santiago</h1>
-                <p>Nos casamos</p>
+                <h1>Carolina &amp; Santiago</h1>
+                <p class="fecha-mes" >Nos casamos</p>
 
-                <div class="fecha-evento">
-                    <p class="fecha-dia">Miércoles 7 de abril de 2027</p>
-                    <p class="fecha-hora">3:00 PM</p>
-                </div>
-
-                <div id="countdown" class="countdown row justify-content-center g-2 g-sm-3">
-                    <div class="countdown-item col-3 col-sm-auto">
-                        <span id="dias">00</span>
-                        <small>Días</small>
+                <div class="fecha-formato">
+                    <p class="fecha-mes">Abril</p>
+                    <div class="fecha-fila">
+                        <span class="fecha-dia-semana">Miércoles</span>
+                        <span class="fecha-numero">7</span>
+                        <span class="fecha-hora">15:00 Hrs</span>
                     </div>
-                    <div class="countdown-item col-3 col-sm-auto">
-                        <span id="horas">00</span>
-                        <small>Horas</small>
-                    </div>
-                    <div class="countdown-item col-3 col-sm-auto">
-                        <span id="minutos">00</span>
-                        <small>Min</small>
-                    </div>
-                    <div class="countdown-item col-3 col-sm-auto">
-                        <span id="segundos">00</span>
-                        <small>Seg</small>
-                    </div>
+                    <p class="fecha-anio">2027</p>
+                    <p class="fecha-lugar">El Rosal, Cundinamarca</p>
                 </div>
             </div>
         </section>
@@ -105,47 +91,55 @@
             <div class="container">
                 <h2>Itinerario</h2>
 
-                <div class="itinerario row justify-content-center g-4">
-                    <div class="itinerario-item col-6 col-sm-3">
+                <div class="itinerario-vertical mx-auto">
+                    <div class="itinerario-item">
                         <svg class="itinerario-icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
                             <path d="M14 3v18l-9-2V5z"/>
                             <path d="M14 3h6v18h-6"/>
                             <circle cx="10.5" cy="12" r="0.8" fill="currentColor" stroke="none"/>
                         </svg>
-                        <h3>Entrada</h3>
-                        <p>3:00 PM</p>
+                        <div class="itinerario-texto">
+                            <h3>Entrada</h3>
+                            <p>3:00 PM</p>
+                        </div>
                     </div>
 
-                    <div class="itinerario-item col-6 col-sm-3">
+                    <div class="itinerario-item">
                         <svg class="itinerario-icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
                             <circle cx="9" cy="14" r="5"/>
                             <circle cx="15" cy="14" r="5"/>
                             <path d="M9 4l1.5 4M15 4l-1.5 4"/>
                         </svg>
-                        <h3>Ceremonia</h3>
-                        <p>4:00 PM</p>
+                        <div class="itinerario-texto">
+                            <h3>Ceremonia</h3>
+                            <p>4:00 PM</p>
+                        </div>
                     </div>
 
-                    <div class="itinerario-item col-6 col-sm-3">
+                    <div class="itinerario-item">
                         <svg class="itinerario-icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
                             <path d="M6 3v4a3 3 0 0 0 6 0V3"/>
                             <path d="M9 7v14"/>
                             <path d="M16 3v6a2 2 0 0 0 4 0V3"/>
                             <path d="M18 9v12"/>
                         </svg>
-                        <h3>Cena</h3>
-                        <p>5:00 PM</p>
+                        <div class="itinerario-texto">
+                            <h3>Cena</h3>
+                            <p>5:00 PM</p>
+                        </div>
                     </div>
 
-                    <div class="itinerario-item col-6 col-sm-3">
+                    <div class="itinerario-item">
                         <svg class="itinerario-icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
                             <path d="M8 3h8l-1 6a3 3 0 0 1-6 0z"/>
                             <path d="M12 9v10M9 19h6"/>
                             <circle cx="10" cy="5.5" r="0.4" fill="currentColor" stroke="none"/>
                             <circle cx="13" cy="6.5" r="0.4" fill="currentColor" stroke="none"/>
                         </svg>
-                        <h3>Fiesta</h3>
-                        <p>7:00 PM - 2:00 AM</p>
+                        <div class="itinerario-texto">
+                            <h3>Fiesta</h3>
+                            <p>7:00 PM - 2:00 AM</p>
+                        </div>
                     </div>
                 </div>
 
@@ -203,36 +197,43 @@
             <div class="container">
                 <h2>Galería</h2>
                 <div class="row g-3 justify-content-center">
-    <div class="col-6 col-md-4">
-        <img src="assets/galeria3.jpeg" class="img-fluid img-galeria" alt="Galería">
-    </div>
-    <div class="col-6 col-md-4">
-        <img src="assets/galeria4.jpeg" class="img-fluid img-galeria" alt="Galería">
-    </div>
-    <div class="col-6 col-md-4">
-        <img src="assets/galeria5.jpeg" class="img-fluid img-galeria" alt="Galería">
-    </div>
-    <div class="col-6 col-md-4">
-        <img src="assets/galeria6.jpeg" class="img-fluid img-galeria" alt="Galería">
-    </div>
-    <div class="col-6 col-md-4">
-        <img src="assets/galeria7.jpeg" class="img-fluid img-galeria" alt="Galería">
-    </div>
-    <div class="col-6 col-md-4">
-        <img src="assets/galeria8.jpeg" class="img-fluid img-galeria" alt="Galería">
-    </div>
-    <div class="col-6 col-md-4">
-        <img src="assets/galeria9.jpeg" class="img-fluid img-galeria" alt="Galería">
-    </div>
-    <div class="col-6 col-md-4">
-        <img src="assets/galeria10.jpeg" class="img-fluid img-galeria" alt="Galería">
-    </div>
-</div>
+                    <div class="col-6 col-md-4">
+                        <img src="assets/galeria3.jpeg" class="img-galeria" alt="Galería">
+                    </div>
+                    <div class="col-6 col-md-4">
+                        <img src="assets/galeria4.jpeg" class="img-galeria" alt="Galería">
+                    </div>
+                    <div class="col-6 col-md-4">
+                        <img src="assets/galeria5.jpeg" class="img-galeria" alt="Galería">
+                    </div>
+                    <div class="col-6 col-md-4">
+                        <img src="assets/galeria6.jpeg" class="img-galeria" alt="Galería">
+                    </div>
+                    <div class="col-6 col-md-4">
+                        <img src="assets/galeria7.jpeg" class="img-galeria" alt="Galería">
+                    </div>
+                    <div class="col-6 col-md-4">
+                        <img src="assets/galeria8.jpeg" class="img-galeria" alt="Galería">
+                    </div>
+                    <div class="col-6 col-md-4">
+                        <img src="assets/galeria9.jpeg" class="img-galeria" alt="Galería">
+                    </div>
+                    <div class="col-6 col-md-4">
+                        <img src="assets/galeria10.jpeg" class="img-galeria" alt="Galería">
+                    </div>
+                </div>
             </div>
         </section>
 
         <!-- RSVP -->
         <section id="rsvp">
+            <p class="rsvp-mensaje">
+    Nos hace mucha ilusión compartir este momento contigo.
+    Entendemos que a veces no es posible asistir, y
+    agradeceremos tu sinceridad. Por ello, te pedimos confirmar tu
+    asistencia para poder reservar tu lugar y celebrar juntos uno de
+    los días más especiales de nuestra historia.
+            </p>
             <div class="container">
                 <h2>Confirma tu asistencia</h2>
 
@@ -244,7 +245,29 @@
 
                 <p id="mensaje-rsvp" class="mensaje-rsvp"></p>
             </div>
+            <div class="container">
+                <h2>Faltan</h2>
+                <div id="countdown" class="countdown row justify-content-center g-2 g-sm-3">
+                    <div class="countdown-item col-3 col-sm-auto">
+                        <span id="dias">00</span>
+                        <small>Días</small>
+                    </div>
+                    <div class="countdown-item col-3 col-sm-auto">
+                        <span id="horas">00</span>
+                        <small>Horas</small>
+                    </div>
+                    <div class="countdown-item col-3 col-sm-auto">
+                        <span id="minutos">00</span>
+                        <small>Min</small>
+                    </div>
+                    <div class="countdown-item col-3 col-sm-auto">
+                        <span id="segundos">00</span>
+                        <small>Seg</small>
+                    </div>
+                </div>
+            </div>
         </section>
+
 
     </div>
 

@@ -9,9 +9,6 @@
     --fuente-titulo: 'Playfair Display', serif;
     --fuente-cuerpo: 'Montserrat', sans-serif;
 }
-html {
-    color-scheme: light only;
-}
 
 /* ===== RESET BÁSICO ===== */
 * {
@@ -133,6 +130,7 @@ img {
 #dresscode { background-color: var(--color-fondo); }
 #galeria { background-color: var(--color-secundario); color: white; }
 #rsvp { background-color: var(--color-fondo); }
+#countdown-seccion { background-color: var(--color-primario); color: white; }
 
 .pantalla-invitacion h1 {
     font-family: var(--fuente-titulo);
@@ -201,23 +199,76 @@ img {
     z-index: 1;
 }
 
-.fecha-evento {
-    margin: 1.5rem 0;
+/* ===== FORMATO DE FECHA (estilo "AGOSTO / 28 / 18:00 Hrs") ===== */
+.fecha-formato {
+    margin: 1.5rem auto 0 auto;
+    color: white;
     text-align: center;
 }
 
-.fecha-dia {
+.fecha-mes {
+    font-size: 0.85rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    opacity: 0.9;
+    margin-bottom: 0.3rem;
+}
+
+.fecha-fila {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    column-gap: 1rem;
+    max-width: 360px;
+    margin: 0 auto;
+}
+
+.fecha-dia-semana {
+    justify-self: end;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    opacity: 0.9;
+}
+
+.fecha-numero {
     font-family: var(--fuente-titulo);
-    font-size: 1.3rem;
-    color: white;
+    font-size: 4rem;
+    line-height: 1;
+    font-weight: 600;
 }
 
 .fecha-hora {
-    font-size: 1rem;
+    justify-self: start;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    opacity: 0.9;
+}
+
+.fecha-anio {
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+    opacity: 0.85;
+    margin-top: -0.3rem;
+}
+
+.fecha-lugar {
+    font-size: 0.75rem;
     letter-spacing: 2px;
     text-transform: uppercase;
     opacity: 0.85;
-    margin-top: 0.2rem;
+    margin-top: 0.8rem;
+}
+
+@media (max-width: 400px) {
+    .fecha-numero {
+        font-size: 3rem;
+    }
+    .fecha-dia-semana,
+    .fecha-hora {
+        font-size: 0.65rem;
+    }
 }
 
 /* ===== COUNTDOWN ===== */
@@ -225,10 +276,9 @@ img {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: var(--color-primario);
-    color: white;
+    background-color: white;
+    color: var(--color-primario);
     padding: 0.8rem 0.5rem;
-    margin: 5px;
     border-radius: 8px;
 }
 
@@ -353,33 +403,57 @@ img {
     color: var(--color-primario);
 }
 
-/* ===== ITINERARIO ===== */
-.itinerario {
-    margin: 0 auto 3rem auto;
-    max-width: 600px;
+/* ===== ITINERARIO VERTICAL ===== */
+.itinerario-vertical {
+    display: flex;
+    flex-direction: column;
+    max-width: 320px;
+    margin-bottom: 3rem;
+    position: relative;
 }
 
 .itinerario-item {
     display: flex;
-    flex-direction: column;
     align-items: center;
+    gap: 1.2rem;
+    text-align: left;
+    padding: 1rem 0;
+    position: relative;
+}
+
+/* Línea vertical conectando los puntos, salvo el último item */
+.itinerario-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 21px; /* centrado respecto al ícono de 42px de ancho contenedor */
+    top: 58px;
+    width: 1px;
+    height: calc(100% - 20px);
+    background-color: var(--color-secundario);
+    opacity: 0.5;
 }
 
 .itinerario-icono {
-    width: 36px;
-    height: 36px;
+    width: 42px;
+    height: 42px;
+    padding: 8px;
     color: var(--color-primario);
-    margin-bottom: 0.6rem;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
 }
 
-.itinerario-item h3 {
+.itinerario-texto h3 {
     font-family: var(--fuente-titulo);
-    font-size: 1rem;
-    margin-bottom: 0.2rem;
+    font-size: 1.05rem;
+    margin-bottom: 0.15rem;
 }
 
-.itinerario-item p {
-    font-size: 0.8rem;
+.itinerario-texto p {
+    font-size: 0.85rem;
     color: var(--color-texto);
     opacity: 0.75;
 }
