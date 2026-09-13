@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-
+    
     <!-- ===== PANTALLA 1: LA CARTA (no scrolleable) ===== -->
     <div id="carta" class="pantalla-carta">
         <div class="sobre">
@@ -25,6 +25,12 @@
 
     <!-- ===== PANTALLA 2: INVITACIÓN (scrolleable) ===== -->
     <div id="invitacion" class="pantalla-invitacion">
+
+        <audio id="musica-fondo" loop>
+        <source src="assets/musica.mp3" type="audio/mpeg">
+        </audio>
+
+        <button id="btn-musica" class="btn-musica" aria-label="Silenciar música">🔊</button>
 
         <!-- PORTADA -->
         <section id="portada">
@@ -38,8 +44,11 @@
             </div>
 
             <div class="container portada-contenido">
-                <h1>Carolina &amp; Santiago</h1>
                 <p class="fecha-mes" >Nos casamos</p>
+                <h1>Carolina</h1>
+                <h1> &amp;</h1>
+                <h1>Santiago</h1>
+                
 
                 <div class="fecha-formato">
                     <p class="fecha-mes">Abril</p>
@@ -48,8 +57,9 @@
                         <span class="fecha-numero">7</span>
                         <span class="fecha-hora">15:00 Hrs</span>
                     </div>
+                    <p>================</p>
                     <p class="fecha-anio">2027</p>
-                    <p class="fecha-lugar">El Rosal, Cundinamarca</p>
+                    <p class="fecha-lugar">Bogotá, Colombia</p>
                 </div>
             </div>
         </section>
@@ -89,6 +99,7 @@
         <!-- DETALLES / ITINERARIO -->
         <section id="detalles">
             <div class="container">
+                <div id="escarcha-container"></div>
                 <h2>Itinerario</h2>
 
                 <div class="itinerario-vertical mx-auto">
@@ -177,15 +188,23 @@
 
                 <div class="dresscode-grid row justify-content-center g-4">
                     <div class="dresscode-item col-6 col-sm-4">
-                        <span class="dresscode-icono">👗</span>
-                        <h3>Mujeres</h3>
-                        <p>Vestido largo</p>
-                    </div>
-                    <div class="dresscode-item col-6 col-sm-4">
-                        <span class="dresscode-icono">🤵</span>
-                        <h3>Hombres</h3>
-                        <p>Etiqueta</p>
-                    </div>
+    <svg class="dresscode-icono-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+        <circle cx="12" cy="4" r="2"/>
+        <path d="M9.5 6c-1 3-1.5 5-3.5 15h12c-2-10-2.5-12-3.5-15"/>
+        <path d="M7 15h10"/>
+    </svg>
+    <h3>Mujeres</h3>
+    <p>Vestido largo</p>
+</div>
+<div class="dresscode-item col-6 col-sm-4">
+    <svg class="dresscode-icono-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+        <path d="M9 3l3 2 3-2 2 3-2 2 1 13H8L9 8 7 6z"/>
+        <path d="M12 5v6"/>
+        <path d="M10.5 11l1.5 2 1.5-2"/>
+    </svg>
+    <h3>Hombres</h3>
+    <p>Etiqueta</p>
+</div>
                 </div>
 
                 <p class="dresscode-restriccion">Se reserva el color blanco</p>
@@ -238,9 +257,11 @@
                 <h2>Confirma tu asistencia</h2>
 
                 <form id="form-rsvp" class="form-rsvp mx-auto">
-                    <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre" required>
-                    <input type="text" id="apellido" name="apellido" class="form-control" placeholder="Apellido" required>
-                    <button type="submit" class="btn-rsvp">Confirmar asistencia</button>
+                <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre" required>
+                <input type="text" id="apellido" name="apellido" class="form-control" placeholder="Apellido" required>
+                <input type="tel" id="telefono" name="telefono" class="form-control" placeholder="Teléfono" required>
+                <input type="number" id="acompanantes" name="acompanantes" class="form-control" placeholder="Número de acompañantes" min="0" required>
+                <button type="submit" class="btn-rsvp">Confirmar asistencia</button>
                 </form>
 
                 <p id="mensaje-rsvp" class="mensaje-rsvp"></p>
@@ -270,6 +291,19 @@
 
 
     </div>
+    <!-- MODAL DE AGRADECIMIENTO RSVP -->
+<div class="modal fade" id="modalGracias" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content modal-gracias-content">
+            <div class="modal-body text-center py-5">
+                <div class="modal-icono">💌</div>
+                <h3>¡Gracias por confirmar!</h3>
+                <p id="modalGraciasTexto">Tu asistencia fue registrada con éxito.</p>
+                <button type="button" class="btn-rsvp mt-3" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/script.js"></script>

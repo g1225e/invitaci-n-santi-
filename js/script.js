@@ -81,11 +81,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const formRsvp = document.getElementById('form-rsvp');
     const mensajeRsvp = document.getElementById('mensaje-rsvp');
 
+    let enviandoRsvp = false; // bandera para bloquear envíos dobles
+
     formRsvp.addEventListener('submit', async (evento) => {
         evento.preventDefault();
 
+        // Si ya hay un envío en curso, ignora cualquier intento adicional
+        if (enviandoRsvp) return;
+
         const nombre = document.getElementById('nombre').value.trim();
         const apellido = document.getElementById('apellido').value.trim();
+        const telefono = document.getElementById('telefono').value.trim();
+        const acompanantes = document.getElementById('acompanantes').value;
+
+        // Validación extra en JS, además del "required" del HTML
+        if (!nombre || !apellido || !telefono || acompanantes === '') {
+            mensajeRsvp.textContent = 'Por favor completa todos los campos.';
+            mensajeRsvp.classList.add('error');
+            return;
+        }
+
+        enviandoRsvp = true;
 
         const boton = formRsvp.querySelector('button');
         boton.disabled = true;
@@ -100,11 +116,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 headers: {
                     'Content-Type': 'text/plain',
                 },
-                body: JSON.stringify({ nombre, apellido }),
+                body: JSON.stringify({ nombre, apellido, telefono, acompanantes }),
             });
 
             mensajeRsvp.textContent = `¡Gracias ${nombre}! Tu asistencia fue confirmada.`;
             mensajeRsvp.classList.add('exito');
+
+            // Mostrar el popup de agradecimiento
+            document.getElementById('modalGraciasTexto').textContent =
+                `Gracias ${nombre}, tu asistencia fue confirmada con éxito.`;
+            const modalGracias = new bootstrap.Modal(document.getElementById('modalGracias'));
+            modalGracias.show();
+
             formRsvp.reset();
 
         } catch (error) {
@@ -115,7 +138,52 @@ document.addEventListener('DOMContentLoaded', () => {
         } finally {
             boton.disabled = false;
             boton.textContent = 'Confirmar asistencia';
+            enviandoRsvp = false;
         }
     });
+
+        // ===== MÚSICA DE FONDO =====
+    const musica = document.getElementById('musica-fondo');
+    const btnMusica = document.getElementById('btn-musica');
+
+    sello.addEventListener('click', () => {
+        // Intentamos reproducir apenas se hace click (ya cuenta como interacción del usuario)
+        musica.play().catch((error) => {
+            console.log('No se pudo reproducir automáticamente:', error);
+        });
+        btnMusica.classList.add('visible');
+    });
+
+    btnMusica.addEventListener('click', () => {
+        if (musica.paused) {
+            musica.play();
+            btnMusica.textContent = '🔊';
+        } else {
+            musica.pause();
+            btnMusica.textContent = '🔇';
+        }
+    });
+
+        // ===== ESCARCHA CAYENDO =====
+    const contenedorEscarcha = document.getElementById('escarcha-container');
+    const cantidadParticulas = 40;
+
+    for (let i = 0; i < cantidadParticulas; i++) {
+        const particula = document.createElement('div');
+        particula.classList.add('particula-escarcha');
+
+        const tamano = Math.random() * 5 + 3; // entre 3px y 8px
+        const posicionInicial = Math.random() * 100; // % horizontal
+        const duracion = Math.random() * 6 + 5; // entre 5s y 11s
+        const retraso = Math.random() * 8; // hasta 8s de retraso antes de empezar
+
+        particula.style.width = `${tamano}px`;
+        particula.style.height = `${tamano}px`;
+        particula.style.left = `${posicionInicial}%`;
+        particula.style.animationDuration = `${duracion}s`;
+        particula.style.animationDelay = `${retraso}s`;
+
+        contenedorEscarcha.appendChild(particula);
+    }
 
 });

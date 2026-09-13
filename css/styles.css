@@ -525,10 +525,7 @@ img {
     align-items: center;
 }
 
-.dresscode-icono {
-    font-size: 2.2rem;
-    margin-bottom: 0.5rem;
-}
+
 
 .dresscode-item h3 {
     font-family: var(--fuente-titulo);
@@ -622,4 +619,90 @@ img {
 
 .mensaje-rsvp.error {
     color: #B0342C;
+}
+.dresscode-icono-svg {
+    width: 44px;
+    height: 44px;
+    color: var(--color-primario);
+    margin-bottom: 0.6rem;
+}
+
+/* ===== MODAL DE AGRADECIMIENTO ===== */
+.modal-gracias-content {
+    border: none;
+    border-radius: 12px;
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+}
+
+.modal-icono {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.modal-gracias-content h3 {
+    font-family: var(--fuente-titulo);
+    color: var(--color-primario);
+    margin-bottom: 0.8rem;
+}
+
+.modal-gracias-content p {
+    font-size: 0.95rem;
+    opacity: 0.85;
+}
+
+/* ===== BOTÓN DE MÚSICA ===== */
+.btn-musica {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: none;
+    background-color: var(--color-primario);
+    color: white;
+    font-size: 1.3rem;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    z-index: 50;
+    display: none; /* aparece solo después de abrir la carta */
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-musica.visible {
+    display: flex;
+}
+
+/* ===== ESCARCHA CAYENDO ===== */
+#escarcha-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* para que nunca bloquee clicks en botones/formularios */
+    z-index: 40; /* por debajo de la carta (100) y del botón de música (50) */
+    overflow: hidden;
+}
+
+.particula-escarcha {
+    position: absolute;
+    top: -10px;
+    background-color: var(--color-acento);
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: caer linear infinite;
+}
+
+@keyframes caer {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0.3;
+    }
 }
