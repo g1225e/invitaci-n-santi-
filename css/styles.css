@@ -5,6 +5,7 @@
     --color-secundario: #8B9A8C;
     --color-texto: #3A3A38;
     --color-acento: #B0785C;
+    --color-oscuro: #3F4A40;
 
     --fuente-titulo: 'Playfair Display', serif;
     --fuente-cuerpo: 'Montserrat', sans-serif;
@@ -17,8 +18,11 @@
     box-sizing: border-box;
 }
 
+html {
+    color-scheme: light only;
+}
+
 html, body {
-    /* Evita que CUALQUIER elemento que se pase del ancho genere scroll horizontal */
     overflow-x: hidden;
     width: 100%;
 }
@@ -34,8 +38,37 @@ img {
     height: auto;
 }
 
+/* ===== ESCARCHA CAYENDO ===== */
+#escarcha-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 40;
+    overflow: hidden;
+}
+
+.particula-escarcha {
+    position: absolute;
+    top: -10px;
+    background-color: var(--color-acento);
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: caer linear infinite;
+}
+
+@keyframes caer {
+    0%   { transform: translateY(0) rotate(0deg); opacity: 0.8; }
+    100% { transform: translateY(110vh) rotate(360deg); opacity: 0.3; }
+}
+
 /* ===== PANTALLA 1: LA CARTA ===== */
 .pantalla-carta {
+    background-image: url('../assets/sobre.jpg');
+    background-size: cover;
+    background-position: center;
     position: fixed;
     top: 0;
     left: 0;
@@ -81,9 +114,7 @@ img {
     flex-shrink: 0;
 }
 
-.sello:hover {
-    transform: scale(1.05);
-}
+.sello:hover { transform: scale(1.05); }
 
 .sello.roto {
     transform: scale(1.3);
@@ -107,35 +138,106 @@ img {
     overflow-x: hidden;
 }
 
-.pantalla-invitacion.visible {
-    display: block;
-}
+.pantalla-invitacion.visible { display: block; }
 
 .pantalla-invitacion section {
-    min-height: 100vh;
     width: 100%;
-    padding: 4rem 1rem;
+    padding: 5rem 1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+#portada, #fecha, #historia, #mensaje, #itinerario, #detalles, #regalo, #galeria, #rsvp {
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    position: relative;
-    overflow: hidden; /* clave: nada dentro de una sección se sale de ella */
 }
 
+.seccion-textura {
+    background-color: var(--color-fondo);
+    position: relative;
+    background-image: url('../assets/textura-fondo.png');
+    background-repeat: repeat;
+    background-size: 420px;
+    background-blend-mode: multiply;
+}
+
+/* ===== FLOR DECORATIVA DE ESQUINA (estática) ===== */
+.decoracion-flor {
+    position: absolute;
+    width: 140px;
+    z-index: 3;
+    pointer-events: none;
+    opacity: 0.9;
+}
+
+.decoracion-flor-portada {
+    top: -10px;
+    right: -20px;
+    width: 170px;
+}
+
+.decoracion-flor-fecha {
+    top: -15px;
+    right: -15px;
+    width: 120px;
+    transform: rotate(15deg);
+}
+
+.decoracion-flor-detalles {
+    bottom: -20px;
+    left: -20px;
+    width: 130px;
+    transform: scaleX(-1) rotate(10deg);
+}
+
+@media (max-width: 480px) {
+    .decoracion-flor { width: 90px; }
+    .decoracion-flor-portada { width: 110px; }
+}
+
+/* ===== NOTA DE LUGAR COMPARTIDO ===== */
+.detalles-nota-lugar {
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--color-primario);
+    opacity: 0.8;
+    margin-bottom: 1.5rem;
+}
+
+.lugar-compartido {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.lugar-compartido-nombre {
+    font-family: var(--fuente-titulo);
+    font-size: 1.2rem;
+    margin-bottom: 0.2rem;
+}
+
+/* ===== ANIMACIÓN DE ÍCONOS AL ENTRAR EN PANTALLA (JS agrega .animar) ===== */
+.icono-animado {
+    opacity: 0;
+    transform: scale(0.5) rotate(-15deg);
+    transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.icono-animado.animar {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+}
+.seccion-oscura { background-color: var(--color-primario); color: white; }
 #historia { background-color: var(--color-secundario); color: white; }
-#mensaje { background-color: var(--color-fondo); }
-#detalles { background-color: var(--color-fondo); }
-#dresscode { background-color: var(--color-fondo); }
-#galeria { background-color: var(--color-secundario); color: white; }
-#rsvp { background-color: var(--color-fondo); }
-#countdown-seccion { background-color: var(--color-primario); color: white; }
 
 .pantalla-invitacion h1 {
     font-family: var(--fuente-titulo);
     font-size: 3rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.3rem;
 }
 
 .pantalla-invitacion h2 {
@@ -145,131 +247,182 @@ img {
 }
 
 @media (max-width: 576px) {
-    .pantalla-invitacion h1 {
-        font-size: 2.2rem;
-    }
-    .pantalla-invitacion h2 {
-        font-size: 1.6rem;
-    }
+    .pantalla-invitacion h1 { font-size: 2.2rem; }
+    .pantalla-invitacion h2 { font-size: 1.6rem; }
 }
 
-/* ===== SLIDESHOW DE FONDO (PORTADA) ===== */
+/* ===== ONDAS DIVISORIAS ===== */
+.onda-divisoria {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    line-height: 0;
+    z-index: 2;
+}
+
+.onda-divisoria svg { width: 100%; height: 60px; display: block; }
+
+.onda-invertida { bottom: auto; top: -1px; }
+
+/* ===== PORTADA ===== */
 #portada {
     position: relative;
-    overflow: hidden;
     color: white;
+    padding-bottom: 6rem;
 }
 
 .slideshow-bg {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
     z-index: 0;
 }
 
 .slide {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
     background-size: cover;
     background-position: center;
     opacity: 0;
     transition: opacity 0.8s ease;
 }
 
-.slide.activa {
-    opacity: 1;
-}
+.slide.activa { opacity: 1; }
 
 .slideshow-overlay {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
     background-color: rgba(0, 0, 0, 0.35);
 }
 
-.portada-contenido {
-    position: relative;
-    z-index: 1;
-}
+.portada-contenido { position: relative; z-index: 1; }
 
-/* ===== FORMATO DE FECHA (estilo "AGOSTO / 28 / 18:00 Hrs") ===== */
-.fecha-formato {
-    margin: 1.5rem auto 0 auto;
-    color: white;
-    text-align: center;
-}
-
-.fecha-mes {
-    font-size: 0.85rem;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    opacity: 0.9;
-    margin-bottom: 0.3rem;
-}
-
-.fecha-fila {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    align-items: center;
-    column-gap: 1rem;
-    max-width: 360px;
-    margin: 0 auto;
-}
-
-.fecha-dia-semana {
-    justify-self: end;
+.texto-preludio {
     font-size: 0.8rem;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    opacity: 0.9;
-}
-
-.fecha-numero {
-    font-family: var(--fuente-titulo);
-    font-size: 4rem;
-    line-height: 1;
-    font-weight: 600;
-}
-
-.fecha-hora {
-    justify-self: start;
-    font-size: 0.8rem;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    opacity: 0.9;
-}
-
-.fecha-anio {
-    font-size: 0.85rem;
     letter-spacing: 3px;
-    opacity: 0.85;
-    margin-top: -0.3rem;
+    text-transform: uppercase;
+    opacity: 0.9;
+    margin-bottom: 1rem;
 }
 
-.fecha-lugar {
-    font-size: 0.75rem;
+.nombre-novios {
+    font-family: var(--fuente-titulo);
+    font-size: 3.2rem;
+    line-height: 1.1;
+}
+
+.ampersand {
+    display: block;
+    font-family: var(--fuente-titulo);
+    font-style: italic;
+    font-size: 1.8rem;
+    margin: 0.3rem 0;
+    opacity: 0.9;
+}
+
+.texto-casamos {
+    margin-top: 1rem;
+    font-size: 0.9rem;
     letter-spacing: 2px;
     text-transform: uppercase;
-    opacity: 0.85;
-    margin-top: 0.8rem;
+    opacity: 0.9;
 }
 
 @media (max-width: 400px) {
-    .fecha-numero {
-        font-size: 3rem;
-    }
-    .fecha-dia-semana,
-    .fecha-hora {
-        font-size: 0.65rem;
-    }
+    .nombre-novios { font-size: 2.4rem; }
 }
+
+/* ===== FECHA + COUNTDOWN ===== */
+#fecha { position: relative; }
+
+.fecha-oval {
+    width: 180px;
+    height: 220px;
+    border: 1.5px solid var(--color-primario);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem auto;
+    padding: 1rem;
+}
+
+.fecha-lugar-oval {
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--color-primario);
+    margin-bottom: 0.5rem;
+}
+
+.fecha-fila-oval {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+}
+
+.fecha-dia-semana-oval,
+.fecha-mes-oval {
+    font-size: 0.65rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    opacity: 0.8;
+    max-width: 40px;
+}
+
+.fecha-numero-oval {
+    font-family: var(--fuente-titulo);
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--color-primario);
+}
+
+.fecha-anio-oval {
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    margin-top: 0.5rem;
+    opacity: 0.8;
+}
+
+.divisor-ornamental {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    margin-bottom: 2rem;
+}
+
+.divisor-ornamental .linea {
+    width: 60px;
+    height: 1px;
+    background-color: var(--color-secundario);
+}
+
+.divisor-ornamental .rombo {
+    width: 8px;
+    height: 8px;
+    background-color: var(--color-acento);
+    transform: rotate(45deg);
+}
+
+.btn-agendar {
+    display: inline-block;
+    margin-top: 2rem;
+    padding: 0.8rem 1.8rem;
+    background-color: var(--color-acento);
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    transition: background-color 0.2s ease;
+}
+
+.btn-agendar:hover { background-color: var(--color-primario); color: white; }
 
 /* ===== COUNTDOWN ===== */
 .countdown-item {
@@ -297,20 +450,12 @@ img {
 }
 
 @media (min-width: 576px) {
-    .countdown-item {
-        padding: 1rem 1.2rem;
-        min-width: 70px;
-    }
-    .countdown-item span {
-        font-size: 2rem;
-    }
-    .countdown-item small {
-        font-size: 0.7rem;
-    }
+    .countdown-item { padding: 1rem 1.2rem; min-width: 70px; }
+    .countdown-item span { font-size: 2rem; }
+    .countdown-item small { font-size: 0.7rem; }
 }
 
 /* ===== POLAROIDS FLOTANTES ===== */
-/* En desktop/tablet: flotan con posición absoluta y parallax */
 .polaroid {
     position: absolute;
     background-color: white;
@@ -328,53 +473,21 @@ img {
     display: block;
 }
 
-.polaroid-1 {
-    top: 8%;
-    left: 4%;
-    transform: rotate(-8deg);
-}
+.polaroid-1 { top: 8%; left: 4%; transform: rotate(-8deg); }
+.polaroid-2 { bottom: 8%; right: 4%; transform: rotate(6deg); }
 
-.polaroid-2 {
-    bottom: 8%;
-    right: 4%;
-    transform: rotate(6deg);
-}
+.historia-texto { position: relative; z-index: 1; max-width: 500px; }
 
-.historia-texto {
-    position: relative;
-    z-index: 1;
-    max-width: 500px;
-}
-
-/* En pantallas medianas+ las polaroids crecen un poco */
 @media (min-width: 576px) {
-    .polaroid {
-        width: 180px;
-        padding: 12px 12px 40px 12px;
-    }
-    .polaroid img {
-        height: 180px;
-    }
+    .polaroid { width: 180px; padding: 12px 12px 40px 12px; }
+    .polaroid img { height: 180px; }
 }
 
-/* En celulares muy angostos, las achicamos y las metemos más adentro
-   para que NUNCA se salgan del ancho de la pantalla */
 @media (max-width: 400px) {
-    .polaroid {
-        width: 110px;
-        padding: 8px 8px 26px 8px;
-    }
-    .polaroid img {
-        height: 100px;
-    }
-    .polaroid-1 {
-        top: 4%;
-        left: 2%;
-    }
-    .polaroid-2 {
-        bottom: 4%;
-        right: 2%;
-    }
+    .polaroid { width: 110px; padding: 8px 8px 26px 8px; }
+    .polaroid img { height: 100px; }
+    .polaroid-1 { top: 4%; left: 2%; }
+    .polaroid-2 { bottom: 4%; right: 2%; }
 }
 
 /* ===== MENSAJE DE LOS NOVIOS ===== */
@@ -397,41 +510,67 @@ img {
 }
 
 .mensaje-referencia {
-    font-family: var(--fuente-cuerpo);
     font-weight: 700;
     letter-spacing: 1px;
     color: var(--color-primario);
 }
 
-/* ===== ITINERARIO VERTICAL ===== */
+/* ===== ITINERARIO INTERCALADO CON FOTO DE FONDO ===== */
+.itinerario-seccion {
+    position: relative;
+    color: white;
+}
+
+.itinerario-fondo {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+}
+
+.itinerario-overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(63, 74, 64, 0.82); /* --color-oscuro semi-transparente */
+    z-index: 1;
+}
+
+.itinerario-contenido { position: relative; z-index: 2; }
+
 .itinerario-vertical {
     display: flex;
     flex-direction: column;
-    max-width: 320px;
-    margin-bottom: 3rem;
+    max-width: 480px;
     position: relative;
+}
+
+/* Línea central continua */
+.itinerario-vertical::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    bottom: 10px;
+    left: 50%;
+    width: 1px;
+    background-color: rgba(255, 255, 255, 0.4);
+    transform: translateX(-50%);
 }
 
 .itinerario-item {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 50px 1fr;
     align-items: center;
-    gap: 1.2rem;
-    text-align: left;
-    padding: 1rem 0;
+    column-gap: 0.8rem;
+    padding: 1.2rem 0;
     position: relative;
+    z-index: 1;
 }
 
-/* Línea vertical conectando los puntos, salvo el último item */
-.itinerario-item:not(:last-child)::after {
-    content: '';
-    position: absolute;
-    left: 21px; /* centrado respecto al ícono de 42px de ancho contenedor */
-    top: 58px;
-    width: 1px;
-    height: calc(100% - 20px);
-    background-color: var(--color-secundario);
-    opacity: 0.5;
-}
+.itinerario-izquierda .itinerario-texto { text-align: right; }
+.itinerario-derecha .itinerario-texto { text-align: left; }
 
 .itinerario-icono {
     width: 42px;
@@ -440,10 +579,8 @@ img {
     color: var(--color-primario);
     background-color: white;
     border-radius: 50%;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
-    flex-shrink: 0;
-    position: relative;
-    z-index: 1;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+    justify-self: center;
 }
 
 .itinerario-texto h3 {
@@ -454,70 +591,92 @@ img {
 
 .itinerario-texto p {
     font-size: 0.85rem;
-    color: var(--color-texto);
-    opacity: 0.75;
+    opacity: 0.85;
 }
 
-.ubicacion-detalle {
+/* En mobile angosto: colapsa a una sola columna, ícono siempre a la izquierda */
+@media (max-width: 480px) {
+    .itinerario-item {
+        grid-template-columns: 42px 1fr;
+        column-gap: 1rem;
+    }
+    .itinerario-vertical::before { left: 21px; }
+    .itinerario-izquierda .itinerario-texto,
+    .itinerario-derecha .itinerario-texto {
+        text-align: left;
+        grid-column: 2;
+        grid-row: 1;
+    }
+    .itinerario-izquierda .itinerario-icono,
+    .itinerario-derecha .itinerario-icono {
+        grid-column: 1;
+        grid-row: 1;
+    }
+    .itinerario-espaciador { display: none; }
+}
+
+/* ===== DETALLES: CEREMONIA / RECEPCIÓN ===== */
+.detalles-row { margin-bottom: 2rem; }
+
+.detalles-col {
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
-    width: 100%;
 }
 
-.ubicacion-nombre {
+.detalles-icono {
+    width: 40px;
+    height: 40px;
+    color: var(--color-primario);
+    margin-bottom: 0.6rem;
+}
+
+.detalles-col h3 {
     font-family: var(--fuente-titulo);
     font-size: 1.2rem;
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.2rem;
+}
+
+.detalles-hora {
+    font-weight: 600;
+    color: var(--color-primario);
+    margin-bottom: 0.4rem;
+}
+
+.btn-ubicacion {
+    display: inline-block;
+    margin-top: 0.8rem;
+    padding: 0.5rem 1.2rem;
+    border: 1px solid var(--color-primario);
+    color: var(--color-primario);
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-ubicacion:hover {
+    background-color: var(--color-primario);
+    color: white;
 }
 
 .mapa-embebido {
     width: 100%;
     max-width: 500px;
-    margin: 1.5rem 0;
+    margin: 0 auto 3rem auto;
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.mapa-embebido iframe {
-    display: block;
-    width: 100%;
-}
-
-.btn-mapa {
-    display: inline-block;
-    margin-top: 0.5rem;
-    padding: 0.7rem 1.5rem;
-    background-color: var(--color-acento);
-    color: white;
-    text-decoration: none;
-    border-radius: 6px;
-    font-family: var(--fuente-cuerpo);
-    font-size: 0.9rem;
-    font-weight: 500;
-    transition: background-color 0.2s ease;
-}
-
-.btn-mapa:hover {
-    background-color: var(--color-primario);
-    color: white;
-}
+.mapa-embebido iframe { display: block; width: 100%; }
 
 /* ===== DRESS CODE ===== */
-.dresscode-tipo {
-    font-family: var(--fuente-titulo);
-    font-size: 1.5rem;
-    font-style: italic;
-    color: var(--color-primario);
-    margin-bottom: 2rem;
-}
+.dresscode-bloque { width: 100%; }
 
-.dresscode-grid {
-    max-width: 400px;
-    margin: 0 auto 2rem auto;
-}
+.dresscode-grid { max-width: 400px; margin: 0 auto 1.5rem auto; }
 
 .dresscode-item {
     display: flex;
@@ -525,12 +684,53 @@ img {
     align-items: center;
 }
 
-
+.dresscode-icono-svg {
+    width: 44px;
+    height: 44px;
+    color: var(--color-primario);
+    margin-bottom: 0.6rem;
+}
 
 .dresscode-item h3 {
     font-family: var(--fuente-titulo);
     font-size: 1.1rem;
     margin-bottom: 0.3rem;
+}
+
+.dresscode-titulo-chico {
+    font-style: italic;
+    color: var(--color-primario);
+    margin-bottom: 1rem;
+}
+
+.paleta-colores {
+    display: flex;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+}
+
+.color-chip {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: inline-block;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.color-chip-tachado {
+    position: relative;
+}
+
+.color-chip-tachado::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -2px;
+    right: -2px;
+    height: 2px;
+    background-color: var(--color-acento);
+    transform: rotate(-45deg);
 }
 
 .dresscode-restriccion {
@@ -543,6 +743,38 @@ img {
     display: inline-block;
 }
 
+/* ===== SUGERENCIA DE REGALO ===== */
+.regalo-icono {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 1rem;
+}
+
+.regalo-texto {
+    max-width: 480px;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+    line-height: 1.6;
+}
+
+.regalo-card {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 12px;
+    padding: 2rem;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.regalo-card-titulo {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.85rem;
+    margin-bottom: 1.2rem;
+}
+
+.regalo-card-icono { width: 60px; height: 60px; }
+
 /* ===== GALERÍA ===== */
 .img-galeria {
     width: 100%;
@@ -553,12 +785,19 @@ img {
 }
 
 @media (min-width: 576px) {
-    .img-galeria {
-        height: 220px;
-    }
+    .img-galeria { height: 220px; }
 }
 
 /* ===== FORMULARIO RSVP ===== */
+.rsvp-mensaje {
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    line-height: 1.8;
+    max-width: 480px;
+    margin: 0 auto 2rem auto;
+    opacity: 0.9;
+}
+
 .form-rsvp {
     display: flex;
     flex-direction: column;
@@ -571,7 +810,6 @@ img {
     padding: 0.8rem 1rem;
     border: 1px solid var(--color-secundario);
     border-radius: 6px;
-    font-family: var(--fuente-cuerpo);
     font-size: 1rem;
     background-color: white;
     color: var(--color-texto);
@@ -579,7 +817,7 @@ img {
 
 .form-rsvp input:focus {
     outline: none;
-    border-color: var(--color-primario);
+    border-color: white;
     box-shadow: none;
 }
 
@@ -587,24 +825,16 @@ img {
     padding: 0.9rem 1rem;
     border: none;
     border-radius: 6px;
-    background-color: var(--color-primario);
+    background-color: var(--color-acento);
     color: white;
-    font-family: var(--fuente-cuerpo);
     font-size: 1rem;
     font-weight: 500;
     cursor: pointer;
     transition: background-color 0.2s ease;
 }
 
-.btn-rsvp:hover {
-    background-color: var(--color-secundario);
-    color: white;
-}
-
-.btn-rsvp:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-}
+.btn-rsvp:hover { background-color: white; color: var(--color-primario); }
+.btn-rsvp:disabled { opacity: 0.6; cursor: not-allowed; }
 
 .mensaje-rsvp {
     margin-top: 1rem;
@@ -612,20 +842,8 @@ img {
     min-height: 1.2rem;
 }
 
-.mensaje-rsvp.exito {
-    color: var(--color-primario);
-    font-weight: 500;
-}
-
-.mensaje-rsvp.error {
-    color: #B0342C;
-}
-.dresscode-icono-svg {
-    width: 44px;
-    height: 44px;
-    color: var(--color-primario);
-    margin-bottom: 0.6rem;
-}
+.mensaje-rsvp.exito { color: white; font-weight: 600; }
+.mensaje-rsvp.error { color: #F2B8B0; }
 
 /* ===== MODAL DE AGRADECIMIENTO ===== */
 .modal-gracias-content {
@@ -635,10 +853,7 @@ img {
     color: var(--color-texto);
 }
 
-.modal-icono {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-}
+.modal-icono { font-size: 2.5rem; margin-bottom: 1rem; }
 
 .modal-gracias-content h3 {
     font-family: var(--fuente-titulo);
@@ -646,10 +861,7 @@ img {
     margin-bottom: 0.8rem;
 }
 
-.modal-gracias-content p {
-    font-size: 0.95rem;
-    opacity: 0.85;
-}
+.modal-gracias-content p { font-size: 0.95rem; opacity: 0.85; }
 
 /* ===== BOTÓN DE MÚSICA ===== */
 .btn-musica {
@@ -666,43 +878,9 @@ img {
     cursor: pointer;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
     z-index: 50;
-    display: none; /* aparece solo después de abrir la carta */
+    display: none;
     align-items: center;
     justify-content: center;
 }
 
-.btn-musica.visible {
-    display: flex;
-}
-
-/* ===== ESCARCHA CAYENDO ===== */
-#escarcha-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none; /* para que nunca bloquee clicks en botones/formularios */
-    z-index: 40; /* por debajo de la carta (100) y del botón de música (50) */
-    overflow: hidden;
-}
-
-.particula-escarcha {
-    position: absolute;
-    top: -10px;
-    background-color: var(--color-acento);
-    border-radius: 50%;
-    opacity: 0.8;
-    animation: caer linear infinite;
-}
-
-@keyframes caer {
-    0% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 0.8;
-    }
-    100% {
-        transform: translateY(110vh) rotate(360deg);
-        opacity: 0.3;
-    }
-}
+.btn-musica.visible { display: flex; }
