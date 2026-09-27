@@ -66,9 +66,6 @@ img {
 
 /* ===== PANTALLA 1: LA CARTA ===== */
 .pantalla-carta {
-    background-image: url('../assets/sobre.jpg');
-    background-size: cover;
-    background-position: center;
     position: fixed;
     top: 0;
     left: 0;
@@ -338,16 +335,73 @@ img {
 /* ===== FECHA + COUNTDOWN ===== */
 #fecha { position: relative; }
 
+.fecha-etiqueta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    margin-bottom: 0.8rem;
+}
+
+.fecha-etiqueta-inferior { margin-top: 0.8rem; margin-bottom: 1.5rem; }
+
+.fecha-etiqueta-texto {
+    font-family: var(--fuente-titulo);
+    font-size: 1.1rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--color-primario);
+}
+
+/* Línea decorada reutilizable: línea con puntas curvas a cada extremo */
+.linea-decorada {
+    position: relative;
+    width: 70px;
+    height: 10px;
+}
+
+.linea-decorada::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 6px;
+    right: 6px;
+    height: 1px;
+    background-color: var(--color-secundario);
+    transform: translateY(-50%);
+}
+
+.linea-decorada::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 6px;
+    border-top: 1px solid var(--color-secundario);
+    border-radius: 50%;
+    transform: translateY(-50%) scaleY(0.6);
+    opacity: 0.6;
+}
+
+.rombo-mini {
+    width: 7px;
+    height: 7px;
+    background-color: var(--color-acento);
+    transform: rotate(45deg);
+    flex-shrink: 0;
+}
+
 .fecha-oval {
     width: 180px;
-    height: 220px;
+    height: 200px;
     border: 1.5px solid var(--color-primario);
     border-radius: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 1.5rem auto;
+    margin: 0 auto;
     padding: 1rem;
 }
 
@@ -359,32 +413,18 @@ img {
     margin-bottom: 0.5rem;
 }
 
-.fecha-fila-oval {
-    display: flex;
-    align-items: baseline;
-    gap: 0.6rem;
-}
-
-.fecha-dia-semana-oval,
-.fecha-mes-oval {
-    font-size: 0.65rem;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    opacity: 0.8;
-    max-width: 40px;
-}
-
 .fecha-numero-oval {
     font-family: var(--fuente-titulo);
-    font-size: 3rem;
+    font-size: 3.4rem;
     font-weight: 700;
     color: var(--color-primario);
+    line-height: 1;
 }
 
 .fecha-anio-oval {
     font-size: 0.8rem;
     letter-spacing: 2px;
-    margin-top: 0.5rem;
+    margin-top: 0.6rem;
     opacity: 0.8;
 }
 
@@ -393,21 +433,34 @@ img {
     align-items: center;
     justify-content: center;
     gap: 0.8rem;
+    margin-top: 2rem;
     margin-bottom: 2rem;
 }
 
-.divisor-ornamental .linea {
-    width: 60px;
-    height: 1px;
-    background-color: var(--color-secundario);
+/* Divisor floral reutilizable para títulos de sección */
+.divisor-floral {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-bottom: 2rem;
+    color: var(--color-secundario);
 }
 
-.divisor-ornamental .rombo {
-    width: 8px;
-    height: 8px;
-    background-color: var(--color-acento);
-    transform: rotate(45deg);
+.divisor-floral .linea-decorada::before,
+.divisor-floral .linea-decorada::after {
+    background-color: var(--color-secundario);
+    border-color: var(--color-secundario);
 }
+
+.divisor-floral-claro .linea-decorada::before,
+.divisor-floral-claro .linea-decorada::after {
+    background-color: rgba(255, 255, 255, 0.6);
+    border-color: rgba(255, 255, 255, 0.6);
+}
+
+.divisor-floral-claro .rombo-mini { background-color: white; }
+
 
 .btn-agendar {
     display: inline-block;
@@ -540,6 +593,13 @@ img {
 
 .itinerario-contenido { position: relative; z-index: 2; }
 
+.titulo-script {
+    font-family: 'Great Vibes', cursive;
+    font-weight: 400;
+    font-size: 3rem;
+    margin-bottom: 2.5rem;
+}
+
 .itinerario-vertical {
     display: flex;
     flex-direction: column;
@@ -547,40 +607,43 @@ img {
     position: relative;
 }
 
-/* Línea central continua */
-.itinerario-vertical::before {
-    content: '';
+.itinerario-linea {
     position: absolute;
-    top: 10px;
-    bottom: 10px;
+    top: 0;
     left: 50%;
-    width: 1px;
-    background-color: rgba(255, 255, 255, 0.4);
     transform: translateX(-50%);
+    width: 60px;
+    height: 100%;
+    color: rgba(255, 255, 255, 0.55);
+    z-index: 0;
 }
 
 .itinerario-item {
     display: grid;
-    grid-template-columns: 1fr 50px 1fr;
+    grid-template-columns: 1fr 60px 1fr;
     align-items: center;
-    column-gap: 0.8rem;
-    padding: 1.2rem 0;
+    padding: 1.6rem 0;
     position: relative;
     z-index: 1;
 }
 
-.itinerario-izquierda .itinerario-texto { text-align: right; }
-.itinerario-derecha .itinerario-texto { text-align: left; }
+.itinerario-icono-izq .itinerario-icono-wrap { grid-column: 1; justify-self: end; }
+.itinerario-icono-izq .itinerario-espaciador { grid-column: 2; }
+.itinerario-icono-izq .itinerario-texto { grid-column: 3; justify-self: start; text-align: left; }
+
+.itinerario-icono-der .itinerario-texto { grid-column: 1; justify-self: end; text-align: right; }
+.itinerario-icono-der .itinerario-espaciador { grid-column: 2; }
+.itinerario-icono-der .itinerario-icono-wrap { grid-column: 3; justify-self: start; }
 
 .itinerario-icono {
-    width: 42px;
-    height: 42px;
-    padding: 8px;
+    width: 46px;
+    height: 46px;
+    padding: 10px;
     color: var(--color-primario);
     background-color: white;
     border-radius: 50%;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
-    justify-self: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    display: block;
 }
 
 .itinerario-texto h3 {
@@ -594,25 +657,63 @@ img {
     opacity: 0.85;
 }
 
-/* En mobile angosto: colapsa a una sola columna, ícono siempre a la izquierda */
+/* En mobile angosto: colapsa a una columna, ícono siempre a la izquierda de su texto */
 @media (max-width: 480px) {
     .itinerario-item {
-        grid-template-columns: 42px 1fr;
+        grid-template-columns: 50px 1fr;
         column-gap: 1rem;
+        padding: 1.2rem 0;
     }
-    .itinerario-vertical::before { left: 21px; }
-    .itinerario-izquierda .itinerario-texto,
-    .itinerario-derecha .itinerario-texto {
-        text-align: left;
-        grid-column: 2;
-        grid-row: 1;
-    }
-    .itinerario-izquierda .itinerario-icono,
-    .itinerario-derecha .itinerario-icono {
+    .itinerario-linea { left: 25px; width: 40px; }
+
+    .itinerario-icono-izq .itinerario-icono-wrap,
+    .itinerario-icono-der .itinerario-icono-wrap {
         grid-column: 1;
-        grid-row: 1;
+        justify-self: center;
+    }
+    .itinerario-icono-izq .itinerario-texto,
+    .itinerario-icono-der .itinerario-texto {
+        grid-column: 2;
+        justify-self: start;
+        text-align: left;
     }
     .itinerario-espaciador { display: none; }
+}
+
+/* ===== ANIMACIÓN CONTINUA DE LOS SVG (independiente de la aparición del contenedor) ===== */
+.svg-latido {
+    animation: latido-icono 2.6s ease-in-out infinite;
+    transform-origin: center;
+}
+
+@keyframes latido-icono {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.1); }
+}
+
+/* Contenedores genéricos de ícono (detalles, dresscode, regalo) que reciben la animación de aparición */
+.icono-wrap,
+.itinerario-icono-wrap {
+    display: inline-flex;
+}
+
+/* ===== FLOR OSCILANTE DE FONDO (baja opacidad, reutilizada en cada sección) ===== */
+.flor-oscilante {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 380px;
+    max-width: 70%;
+    opacity: 0.1;
+    z-index: 0;
+    pointer-events: none;
+    animation: oscilar-flor 7s ease-in-out infinite;
+}
+
+@keyframes oscilar-flor {
+    0%   { transform: translate(-50%, -50%) translateY(0) rotate(0deg); }
+    50%  { transform: translate(-50%, -50%) translateY(-18px) rotate(3deg); }
+    100% { transform: translate(-50%, -50%) translateY(0) rotate(0deg); }
 }
 
 /* ===== DETALLES: CEREMONIA / RECEPCIÓN ===== */
@@ -884,3 +985,28 @@ img {
 }
 
 .btn-musica.visible { display: flex; }
+
+.tarjeta-sobre {
+    position: relative;
+    width: min(520px, 85vw);
+    aspect-ratio: 3 / 2;
+    background-color: rgba(255, 255, 255, 0.06);
+    border: 1.5px solid rgba(255, 255, 255, 0.5);
+    border-radius: 1px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.solapa-sobre {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    border-left: calc(min(520px, 85vw) / 2) solid transparent;
+    border-right: calc(min(520px, 85vw) / 2) solid transparent;
+    border-top: calc(min(520px, 85vw) * 0.2115) solid rgba(255, 255, 255, 0.08);
+}

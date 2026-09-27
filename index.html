@@ -8,7 +8,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -21,10 +21,13 @@
 
     <!-- ===== PANTALLA 1: LA CARTA (no scrolleable) ===== -->
     <div id="carta" class="pantalla-carta">
-        <div class="sobre">
-            <div class="sello" id="sello">C&amp;S</div>
-            <p class="instruccion">Toca el sello para abrir</p>
-        </div>
+        <div class="tarjeta-sobre">
+    <div class="solapa-sobre"></div>
+    <div class="sobre">
+        <div class="sello" id="sello">C&amp;S</div>
+        <p class="instruccion">Toca el sello para abrir</p>
+    </div>
+</div>
     </div>
 
     <!-- ===== PANTALLA 2: INVITACIÓN (scrolleable) ===== -->
@@ -65,21 +68,30 @@
         <!-- FECHA + COUNTDOWN -->
         <section id="fecha" class="seccion-textura">
             <img src="assets/flor2.png" class="decoracion-flor decoracion-flor-fecha" alt="">
+            <img src="assets/flor1.png" class="flor-oscilante" alt="">
             <div class="container">
+                <div class="fecha-etiqueta fecha-etiqueta-superior">
+                    <span class="linea-decorada"></span>
+                    <span class="fecha-etiqueta-texto">Miércoles</span>
+                    <span class="linea-decorada"></span>
+                </div>
+
                 <div class="fecha-oval">
                     <p class="fecha-lugar-oval">El Rosal</p>
-                    <div class="fecha-fila-oval">
-                        <span class="fecha-dia-semana-oval">Miércoles</span>
-                        <span class="fecha-numero-oval">07</span>
-                        <span class="fecha-mes-oval">Abril</span>
-                    </div>
+                    <span class="fecha-numero-oval">07</span>
                     <p class="fecha-anio-oval">2027</p>
                 </div>
 
+                <div class="fecha-etiqueta fecha-etiqueta-inferior">
+                    <span class="linea-decorada"></span>
+                    <span class="fecha-etiqueta-texto">Abril</span>
+                    <span class="linea-decorada"></span>
+                </div>
+
                 <div class="divisor-ornamental">
-                    <span class="linea"></span>
-                    <span class="rombo"></span>
-                    <span class="linea"></span>
+                    <span class="linea-decorada"></span>
+                    <span class="rombo-mini"></span>
+                    <span class="linea-decorada"></span>
                 </div>
 
                 <div id="countdown" class="countdown row justify-content-center g-2 g-sm-4">
@@ -108,15 +120,16 @@
                 </a>
             </div>
 
-            <div class="onda-divisoria onda-invertida">
+            <div class="onda-divisoria">
                 <svg viewBox="0 0 1200 80" preserveAspectRatio="none">
-                    <path d="M0,40 C300,-10 900,90 1200,40 L1200,0 L0,0 Z" fill="var(--color-primario)"></path>
+                    <path d="M0,40 C300,90 900,-10 1200,40 L1200,80 L0,80 Z" fill="var(--color-fondo)"></path>
                 </svg>
             </div>
         </section>
 
         <!-- HISTORIA -->
         <section id="historia">
+            <img src="assets/flor1.png" class="flor-oscilante" alt="">
             <div class="polaroid polaroid-1" data-velocidad="0.15">
                 <img src="assets/galeria1.jpeg" alt="Nosotros">
             </div>
@@ -128,6 +141,7 @@
                 <div class="container">
                 <span class="comillas">&rdquo;</span>
                 <h2>Mensaje de los novios</h2>
+                <div class="divisor-floral"><span class="linea-decorada"></span><span class="rombo-mini"></span><span class="linea-decorada"></span></div>
                 <p class="mensaje-texto mx-auto">
                     El matrimonio es un pacto bendecido por Dios.
                     «Así que ya no son dos, sino una sola carne.
@@ -137,102 +151,141 @@
                 <p class="mensaje-referencia">Mateo 19:6</p>
             </div>
             </div>
+
+            <div class="onda-divisoria">
+                <svg viewBox="0 0 1200 80" preserveAspectRatio="none">
+                    <path d="M0,40 C300,-10 900,90 1200,40 L1200,80 L0,80 Z" fill="var(--color-oscuro)"></path>
+                </svg>
+            </div>
         </section>
 
 
-        <!-- ITINERARIO (timeline intercalado con foto de fondo) -->
+        <!-- ITINERARIO (timeline curvo intercalado, con foto y flor de fondo) -->
         <section id="itinerario" class="itinerario-seccion">
+            <img src="assets/flor2.png" class="decoracion-flor decoracion-flor-fecha" alt="">
             <div class="itinerario-fondo" style="background-image: url('assets/itinerario-fondo.jpg');"></div>
             <div class="itinerario-overlay"></div>
+            <img src="assets/flor1.png" class="flor-oscilante" alt="">
 
             <div class="container itinerario-contenido">
-                <h2>Itinerario</h2>
+                <h2 class="titulo-script">Itinerario</h2>
+                <div class="divisor-floral"><span class="linea-decorada"></span><span class="rombo-mini"></span><span class="linea-decorada"></span></div>
 
                 <div class="itinerario-vertical mx-auto">
-                    <div class="itinerario-item itinerario-izquierda">
+
+                    <svg class="itinerario-linea" viewBox="0 0 60 400" preserveAspectRatio="none">
+                        <path d="M30,0 C10,50 10,50 30,100 C50,150 50,150 30,200 C10,250 10,250 30,300 C50,350 50,350 30,400"
+                              fill="none" stroke="currentColor" stroke-width="1.2"/>
+                        <circle cx="30" cy="100" r="4" fill="currentColor"/>
+                        <circle cx="30" cy="200" r="4" fill="currentColor"/>
+                        <circle cx="30" cy="300" r="4" fill="currentColor"/>
+                    </svg>
+
+                    <div class="itinerario-item itinerario-icono-izq">
+                        <div class="itinerario-icono-wrap icono-animado">
+                            <svg class="itinerario-icono svg-latido" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                                <path d="M14 3v18l-9-2V5z"/>
+                                <path d="M14 3h6v18h-6"/>
+                                <circle cx="10.5" cy="12" r="0.8" fill="currentColor" stroke="none"/>
+                            </svg>
+                        </div>
+                        <div class="itinerario-espaciador"></div>
                         <div class="itinerario-texto">
                             <h3>Entrada</h3>
                             <p>3:00 PM</p>
                         </div>
-                        <svg class="itinerario-icono icono-animado" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-                            <path d="M14 3v18l-9-2V5z"/>
-                            <path d="M14 3h6v18h-6"/>
-                            <circle cx="10.5" cy="12" r="0.8" fill="currentColor" stroke="none"/>
-                        </svg>
-                        <div class="itinerario-espaciador"></div>
                     </div>
 
-                    <div class="itinerario-item itinerario-derecha">
-                        <div class="itinerario-espaciador"></div>
-                        <svg class="itinerario-icono icono-animado" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-                            <circle cx="9" cy="14" r="5"/>
-                            <circle cx="15" cy="14" r="5"/>
-                            <path d="M9 4l1.5 4M15 4l-1.5 4"/>
-                        </svg>
+                    <div class="itinerario-item itinerario-icono-der">
                         <div class="itinerario-texto">
                             <h3>Ceremonia</h3>
                             <p>4:00 PM</p>
                         </div>
+                        <div class="itinerario-espaciador"></div>
+                        <div class="itinerario-icono-wrap icono-animado">
+                            <svg class="itinerario-icono svg-latido" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                                <circle cx="9" cy="14" r="5"/>
+                                <circle cx="15" cy="14" r="5"/>
+                                <path d="M9 4l1.5 4M15 4l-1.5 4"/>
+                            </svg>
+                        </div>
                     </div>
 
-                    <div class="itinerario-item itinerario-izquierda">
+                    <div class="itinerario-item itinerario-icono-izq">
+                        <div class="itinerario-icono-wrap icono-animado">
+                            <svg class="itinerario-icono svg-latido" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                                <path d="M6 3v4a3 3 0 0 0 6 0V3"/>
+                                <path d="M9 7v14"/>
+                                <path d="M16 3v6a2 2 0 0 0 4 0V3"/>
+                                <path d="M18 9v12"/>
+                            </svg>
+                        </div>
+                        <div class="itinerario-espaciador"></div>
                         <div class="itinerario-texto">
                             <h3>Cena</h3>
                             <p>5:00 PM</p>
                         </div>
-                        <svg class="itinerario-icono icono-animado" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-                            <path d="M6 3v4a3 3 0 0 0 6 0V3"/>
-                            <path d="M9 7v14"/>
-                            <path d="M16 3v6a2 2 0 0 0 4 0V3"/>
-                            <path d="M18 9v12"/>
-                        </svg>
-                        <div class="itinerario-espaciador"></div>
                     </div>
 
-                    <div class="itinerario-item itinerario-derecha">
-                        <div class="itinerario-espaciador"></div>
-                        <svg class="itinerario-icono icono-animado" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-                            <path d="M8 3h8l-1 6a3 3 0 0 1-6 0z"/>
-                            <path d="M12 9v10M9 19h6"/>
-                            <circle cx="10" cy="5.5" r="0.4" fill="currentColor" stroke="none"/>
-                            <circle cx="13" cy="6.5" r="0.4" fill="currentColor" stroke="none"/>
-                        </svg>
+                    <div class="itinerario-item itinerario-icono-der">
                         <div class="itinerario-texto">
                             <h3>Fiesta</h3>
                             <p>7:00 PM - 2:00 AM</p>
                         </div>
+                        <div class="itinerario-espaciador"></div>
+                        <div class="itinerario-icono-wrap icono-animado">
+                            <svg class="itinerario-icono svg-latido" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                                <path d="M8 3h8l-1 6a3 3 0 0 1-6 0z"/>
+                                <path d="M12 9v10M9 19h6"/>
+                                <circle cx="10" cy="5.5" r="0.4" fill="currentColor" stroke="none"/>
+                                <circle cx="13" cy="6.5" r="0.4" fill="currentColor" stroke="none"/>
+                            </svg>
+                        </div>
                     </div>
+
                 </div>
+            </div>
+
+            <div class="onda-divisoria">
+                <svg viewBox="0 0 1200 80" preserveAspectRatio="none">
+                    <path d="M0,40 C300,90 900,-10 1200,40 L1200,80 L0,80 Z" fill="var(--color-fondo)"></path>
+                </svg>
             </div>
         </section>
 
         <!-- DETALLES: CEREMONIA / RECEPCIÓN + DRESS CODE -->
         <section id="detalles" class="seccion-textura">
             <img src="assets/flor2.png" class="decoracion-flor decoracion-flor-detalles" alt="">
+            <img src="assets/flor1.png" class="flor-oscilante" alt="">
             <div class="container">
                 <p class="detalles-nota-lugar">Todos los eventos se realizan en el mismo lugar</p>
 
                 <div class="row g-4 justify-content-center detalles-row">
                     <div class="col-12 col-sm-6 detalles-col">
-                        <svg class="detalles-icono icono-animado" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-                            <path d="M12 2v4M9 6h6l-1 5.5a2 2 0 0 1-4 0z"/>
-                            <path d="M12 12v9M8 21h8"/>
-                        </svg>
+                        <div class="icono-wrap icono-animado">
+                            <svg class="detalles-icono svg-latido" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                                <path d="M12 2v4M9 6h6l-1 5.5a2 2 0 0 1-4 0z"/>
+                                <path d="M12 12v9M8 21h8"/>
+                            </svg>
+                        </div>
                         <h3>Ceremonia</h3>
                         <p class="detalles-hora">4:00 PM</p>
                     </div>
 
                     <div class="col-12 col-sm-6 detalles-col">
-                        <svg class="detalles-icono icono-animado" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-                            <path d="M8 3h8l-1 6a3 3 0 0 1-6 0z"/>
-                            <path d="M12 9v10M9 19h6"/>
-                            <circle cx="10" cy="5.5" r="0.4" fill="currentColor" stroke="none"/>
-                            <circle cx="13" cy="6.5" r="0.4" fill="currentColor" stroke="none"/>
-                        </svg>
+                        <div class="icono-wrap icono-animado">
+                            <svg class="detalles-icono svg-latido" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                                <path d="M8 3h8l-1 6a3 3 0 0 1-6 0z"/>
+                                <path d="M12 9v10M9 19h6"/>
+                                <circle cx="10" cy="5.5" r="0.4" fill="currentColor" stroke="none"/>
+                                <circle cx="13" cy="6.5" r="0.4" fill="currentColor" stroke="none"/>
+                            </svg>
+                        </div>
                         <h3>Fiesta</h3>
                         <p class="detalles-hora">7:00 PM - 2:00 AM</p>
                     </div>
                 </div>
+                
 
                 <div class="lugar-compartido">
                     <p class="lugar-compartido-nombre">Hacienda San Sebastián</p>
@@ -240,6 +293,9 @@
                     <a class="btn-ubicacion"
                        href="https://www.google.com/maps/search/?api=1&query=4.8666936,-74.23508679999999"
                        target="_blank" rel="noopener noreferrer">Ver ubicación</a>
+                </div>
+                <div>
+                    <img src="assets/lugar.webp" class="mapa-embebido mx-auto" alt="">
                 </div>
 
                 <div class="mapa-embebido mx-auto">
@@ -257,20 +313,24 @@
                 <div class="dresscode-bloque">
                     <div class="dresscode-grid row justify-content-center g-4">
                         <div class="dresscode-item col-6 col-sm-4">
-                            <svg class="dresscode-icono-svg icono-animado" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-                                <circle cx="12" cy="4" r="2"/>
-                                <path d="M9.5 6c-1 3-1.5 5-3.5 15h12c-2-10-2.5-12-3.5-15"/>
-                                <path d="M7 15h10"/>
-                            </svg>
+                            <div class="icono-wrap icono-animado">
+                                <svg class="dresscode-icono-svg svg-latido" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                                    <circle cx="12" cy="4" r="2"/>
+                                    <path d="M9.5 6c-1 3-1.5 5-3.5 15h12c-2-10-2.5-12-3.5-15"/>
+                                    <path d="M7 15h10"/>
+                                </svg>
+                            </div>
                             <h3>Mujeres</h3>
                             <p>Vestido largo</p>
                         </div>
                         <div class="dresscode-item col-6 col-sm-4">
-                            <svg class="dresscode-icono-svg icono-animado" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-                                <path d="M9 3l3 2 3-2 2 3-2 2 1 13H8L9 8 7 6z"/>
-                                <path d="M12 5v6"/>
-                                <path d="M10.5 11l1.5 2 1.5-2"/>
-                            </svg>
+                            <div class="icono-wrap icono-animado">
+                                <svg class="dresscode-icono-svg svg-latido" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                                    <path d="M9 3l3 2 3-2 2 3-2 2 1 13H8L9 8 7 6z"/>
+                                    <path d="M12 5v6"/>
+                                    <path d="M10.5 11l1.5 2 1.5-2"/>
+                                </svg>
+                            </div>
                             <h3>Hombres</h3>
                             <p>Etiqueta</p>
                         </div>
@@ -279,29 +339,38 @@
                     <p class="dresscode-titulo-chico">Código de vestimenta: Etiqueta</p>
 
                     <div class="paleta-colores">
-                        <span class="color-chip" style="background:#EAE7E1;"></span>
+                        <span class="color-chip" style="background:#FFFFFF;" title="Reservado"></span>
                         <span class="color-chip" style="background:#C9C3B4;"></span>
                         <span class="color-chip" style="background:#8B9A8C;"></span>
                         <span class="color-chip" style="background:#5C6B5D;"></span>
-                        <span class="color-chip color-chip-tachado" style="background:#FFFFFF;" title="Reservado"></span>
                     </div>
 
                     <p class="dresscode-restriccion">Colores reservados</p>
                 </div>
             </div>
+
+            <div class="onda-divisoria">
+                <svg viewBox="0 0 1200 80" preserveAspectRatio="none">
+                    <path d="M0,40 C300,-10 900,90 1200,40 L1200,80 L0,80 Z" fill="var(--color-primario)"></path>
+                </svg>
+            </div>
         </section>
 
         <!-- SUGERENCIA DE REGALO -->
         <section id="regalo" class="seccion-oscura">
+            <img src="assets/flor1.png" class="flor-oscilante" alt="">
             <div class="container">
-                <svg class="regalo-icono icono-animado" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-                    <rect x="4" y="9" width="16" height="11" rx="1"/>
-                    <path d="M4 9v-2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2"/>
-                    <path d="M12 5v15"/>
-                    <path d="M12 5c-1.5-3-5-2.5-5 0s3.5 1.5 5 0z"/>
-                    <path d="M12 5c1.5-3 5-2.5 5 0s-3.5 1.5-5 0z"/>
-                </svg>
+                <div class="icono-wrap icono-animado">
+                    <svg class="regalo-icono svg-latido" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                        <rect x="4" y="9" width="16" height="11" rx="1"/>
+                        <path d="M4 9v-2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2"/>
+                        <path d="M12 5v15"/>
+                        <path d="M12 5c-1.5-3-5-2.5-5 0s3.5 1.5 5 0z"/>
+                        <path d="M12 5c1.5-3 5-2.5 5 0s-3.5 1.5-5 0z"/>
+                    </svg>
+                </div>
                 <h2>Sugerencia de regalo</h2>
+                <div class="divisor-floral divisor-floral-claro"><span class="linea-decorada"></span><span class="rombo-mini"></span><span class="linea-decorada"></span></div>
                 <p class="regalo-texto mx-auto">
                     Su presencia y sus buenos deseos son un regalo invaluable para nosotros.
                     Sin embargo, si desean tener un detalle, les dejamos esta opción:
@@ -309,20 +378,30 @@
 
                 <div class="regalo-card">
                     <p class="regalo-card-titulo">Lluvia de sobres</p>
-                    <svg class="regalo-card-icono icono-animado" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-                        <rect x="3" y="6" width="18" height="13" rx="1"/>
-                        <path d="M3 7l9 6 9-6"/>
-                        <circle cx="12" cy="15" r="2"/>
-                        <path d="M12 13.5v3M11 15h2"/>
-                    </svg>
+                    <div class="icono-wrap icono-animado">
+                        <svg class="regalo-card-icono svg-latido" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                            <rect x="3" y="6" width="18" height="13" rx="1"/>
+                            <path d="M3 7l9 6 9-6"/>
+                            <circle cx="12" cy="15" r="2"/>
+                            <path d="M12 13.5v3M11 15h2"/>
+                        </svg>
+                    </div>
                 </div>
+            </div>
+
+            <div class="onda-divisoria">
+                <svg viewBox="0 0 1200 80" preserveAspectRatio="none">
+                    <path d="M0,40 C300,90 900,-10 1200,40 L1200,80 L0,80 Z" fill="var(--color-fondo)"></path>
+                </svg>
             </div>
         </section>
 
         <!-- GALERÍA -->
         <section id="galeria" class="seccion-textura">
+            
             <div class="container">
-                <h2>Galería</h2>
+                <h2></h2>
+                <div class="divisor-floral"><span class="linea-decorada"></span><span class="rombo-mini"></span><span class="linea-decorada"></span></div>
                 <div class="row g-3 justify-content-center">
                     <div class="col-6 col-md-4">
                         <img src="assets/galeria3.jpeg" class="img-fluid img-galeria" alt="Galería">
@@ -350,12 +429,20 @@
                     </div>
                 </div>
             </div>
+
+            <div class="onda-divisoria">
+                <svg viewBox="0 0 1200 80" preserveAspectRatio="none">
+                    <path d="M0,40 C300,-10 900,90 1200,40 L1200,80 L0,80 Z" fill="var(--color-primario)"></path>
+                </svg>
+            </div>
         </section>
 
         <!-- RSVP -->
         <section id="rsvp" class="seccion-oscura">
+            <img src="assets/flor1.png" class="flor-oscilante" alt="">
             <div class="container">
                 <h2>Confirma tu asistencia</h2>
+                <div class="divisor-floral divisor-floral-claro"><span class="linea-decorada"></span><span class="rombo-mini"></span><span class="linea-decorada"></span></div>
 
                 <p class="rsvp-mensaje mx-auto">
                     Nos hace mucha ilusión compartir este momento contigo.
@@ -381,6 +468,7 @@
 
     <!-- MODAL DE AGRADECIMIENTO RSVP -->
     <div class="modal fade" id="modalGracias" tabindex="-1" aria-hidden="true">
+        <img src="assets/flor2.png" class="decoracion-flor decoracion-flor-detalles" alt="">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content modal-gracias-content">
                 <div class="modal-body text-center py-5">
