@@ -1,4 +1,18 @@
-/* ===== VARIABLES DE COLOR Y FUENTES ===== */
+/* =====================================================================
+   ÍNDICE
+   0. Variables (colores y fuentes: cámbialos aquí)
+   1. Base y reset
+   2. Animaciones reutilizables
+   3. Pantalla 1: la carta (sobre + sello)
+   4. Pantalla 2: estructura general, títulos, ondas, decoración
+   5. Secciones, en el orden de la página:
+      portada · fecha y countdown · historia/mensaje · itinerario ·
+      detalles y dress code · regalo · galería · RSVP · modal
+   6. Botón de música
+   ===================================================================== */
+
+
+/* ===== 0. VARIABLES ===== */
 :root {
     --color-fondo: #EAE7E1;
     --color-primario: #5C6B5D;
@@ -8,10 +22,12 @@
     --color-oscuro: #3F4A40;
 
     --fuente-titulo: 'Playfair Display', serif;
+    --fuente-script: 'Great Vibes', cursive;
     --fuente-cuerpo: 'Montserrat', sans-serif;
 }
 
-/* ===== RESET BÁSICO ===== */
+
+/* ===== 1. BASE Y RESET ===== */
 * {
     margin: 0;
     padding: 0;
@@ -23,7 +39,7 @@ html {
 }
 
 html, body {
-    overflow-x: hidden;
+    overflow-x: hidden; /* ningún elemento puede generar scroll horizontal */
     width: 100%;
 }
 
@@ -38,7 +54,56 @@ img {
     height: auto;
 }
 
-/* ===== ESCARCHA CAYENDO ===== */
+
+/* ===== 2. ANIMACIONES REUTILIZABLES ===== */
+
+/* Aparición de un contenedor al entrar en pantalla (JS agrega .animar) */
+.icono-animado {
+    opacity: 0;
+    transform: scale(0.5) rotate(-15deg);
+    transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.icono-animado.animar {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+}
+
+/* Latido continuo del SVG (independiente de la aparición del contenedor) */
+.svg-latido {
+    animation: latido-icono 2.6s ease-in-out infinite;
+    transform-origin: center;
+}
+
+@keyframes latido-icono {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.1); }
+}
+
+.icono-wrap,
+.itinerario-icono-wrap {
+    display: inline-flex;
+}
+
+/* Flor de fondo oscilando, baja opacidad (una por sección) */
+.flor-oscilante {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 380px;
+    max-width: 70%;
+    opacity: 0.1;
+    z-index: 0;
+    pointer-events: none;
+    animation: oscilar-flor 7s ease-in-out infinite;
+}
+
+@keyframes oscilar-flor {
+    0%, 100% { transform: translate(-50%, -50%) translateY(0) rotate(0deg); }
+    50%      { transform: translate(-50%, -50%) translateY(-18px) rotate(3deg); }
+}
+
+/* Escarcha cayendo (las partículas las crea el JS) */
 #escarcha-container {
     position: fixed;
     top: 0;
@@ -64,7 +129,8 @@ img {
     100% { transform: translateY(110vh) rotate(360deg); opacity: 0.3; }
 }
 
-/* ===== PANTALLA 1: LA CARTA ===== */
+
+/* ===== 3. PANTALLA 1: LA CARTA ===== */
 .pantalla-carta {
     position: fixed;
     top: 0;
@@ -85,7 +151,41 @@ img {
     pointer-events: none;
 }
 
+/* Tarjeta con forma de sobre.
+   Cambia SOLO --ancho-sobre y la solapa se ajusta sola. */
+.tarjeta-sobre {
+    --ancho-sobre: min(520px, 85vw);
+
+    position: relative;
+    width: var(--ancho-sobre);
+    aspect-ratio: 3 / 2;
+    background-color: rgba(255, 255, 255, 0.06);
+    border: 1.5px solid rgba(255, 255, 255, 0.5);
+    border-radius: 1px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* Solapa triangular. pointer-events:none evita que tape el clic del sello. */
+.solapa-sobre {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    border-left: calc((var(--ancho-sobre) - 3px) / 2) solid transparent;
+    border-right: calc((var(--ancho-sobre) - 3px) / 2) solid transparent;
+    border-top: calc(var(--ancho-sobre) * 0.2115) solid rgba(255, 255, 255, 0.08);
+    pointer-events: none;
+    z-index: 0;
+}
+
 .sobre {
+    position: relative;
+    z-index: 1; /* por encima de la solapa */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -128,7 +228,8 @@ img {
     opacity: 0.8;
 }
 
-/* ===== PANTALLA 2: INVITACIÓN ===== */
+
+/* ===== 4. PANTALLA 2: ESTRUCTURA GENERAL ===== */
 .pantalla-invitacion {
     display: none;
     width: 100%;
@@ -141,10 +242,10 @@ img {
     width: 100%;
     padding: 5rem 1rem;
     position: relative;
-    overflow: hidden;
+    overflow: hidden; /* nada dentro de una sección se sale de ella */
 }
 
-#portada, #fecha, #historia, #mensaje, #itinerario, #detalles, #regalo, #galeria, #rsvp {
+#portada, #fecha, #historia, #itinerario, #detalles, #regalo, #galeria, #rsvp {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -153,100 +254,19 @@ img {
     text-align: center;
 }
 
+/* Fondos de sección */
 .seccion-textura {
     background-color: var(--color-fondo);
-    position: relative;
     background-image: url('../assets/textura-fondo.png');
     background-repeat: repeat;
     background-size: 420px;
     background-blend-mode: multiply;
 }
 
-/* ===== FLOR DECORATIVA DE ESQUINA (estática) ===== */
-.decoracion-flor {
-    position: absolute;
-    width: 140px;
-    z-index: 3;
-    pointer-events: none;
-    opacity: 0.9;
-}
-
-.decoracion-flor-portada {
-    top: -10px;
-    right: -20px;
-    width: 170px;
-}
-
-.decoracion-flor-fecha {
-    top: -15px;
-    right: -15px;
-    width: 120px;
-    transform: rotate(15deg);
-}
-
-.decoracion-flor-detalles {
-    bottom: -20px;
-    left: -20px;
-    width: 130px;
-    transform: scaleX(-1) rotate(10deg);
-}
-
-@media (max-width: 480px) {
-    .itinerario-vertical { width: 100%; }
-
-    .itinerario-item {
-        grid-template-columns: 1fr 44px 1fr;
-        column-gap: 0.4rem;
-        padding: 1.3rem 0;
-    }
-
-    .itinerario-linea { width: 44px; }
-
-    .itinerario-icono {
-        width: 40px;
-        height: 40px;
-        padding: 8px;
-    }
-
-    .itinerario-texto h3 { font-size: 0.95rem; }
-    .itinerario-texto p { font-size: 0.78rem; }
-}
-
-/* ===== NOTA DE LUGAR COMPARTIDO ===== */
-.detalles-nota-lugar {
-    font-size: 0.8rem;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: var(--color-primario);
-    opacity: 0.8;
-    margin-bottom: 1.5rem;
-}
-
-.lugar-compartido {
-    text-align: center;
-    margin-bottom: 2rem;
-}
-
-.lugar-compartido-nombre {
-    font-family: var(--fuente-titulo);
-    font-size: 1.2rem;
-    margin-bottom: 0.2rem;
-}
-
-/* ===== ANIMACIÓN DE ÍCONOS AL ENTRAR EN PANTALLA (JS agrega .animar) ===== */
-.icono-animado {
-    opacity: 0;
-    transform: scale(0.5) rotate(-15deg);
-    transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.icono-animado.animar {
-    opacity: 1;
-    transform: scale(1) rotate(0deg);
-}
 .seccion-oscura { background-color: var(--color-primario); color: white; }
 #historia { background-color: var(--color-secundario); color: white; }
 
+/* Títulos */
 .pantalla-invitacion h1 {
     font-family: var(--fuente-titulo);
     font-size: 3rem;
@@ -259,12 +279,21 @@ img {
     margin-bottom: 1.5rem;
 }
 
+/* Título cursivo (Itinerario). Lleva .pantalla-invitacion delante para
+   ganarle en especificidad a la regla de h2 de arriba. */
+.pantalla-invitacion .titulo-script {
+    font-family: var(--fuente-script);
+    font-weight: 400;
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+}
+
 @media (max-width: 576px) {
     .pantalla-invitacion h1 { font-size: 2.2rem; }
     .pantalla-invitacion h2 { font-size: 1.6rem; }
 }
 
-/* ===== ONDAS DIVISORIAS ===== */
+/* Ondas entre secciones */
 .onda-divisoria {
     position: absolute;
     bottom: -1px;
@@ -278,9 +307,84 @@ img {
 
 .onda-invertida { bottom: auto; top: -1px; }
 
-/* ===== PORTADA ===== */
-#portada {
+/* Flor decorativa de esquina (estática) */
+.decoracion-flor {
+    position: absolute;
+    width: 140px;
+    z-index: 3;
+    pointer-events: none;
+    opacity: 0.9;
+}
+
+.decoracion-flor-portada { top: -10px; right: -20px; width: 170px; }
+.decoracion-flor-fecha   { top: -15px; right: -15px; width: 120px; transform: rotate(15deg); }
+.decoracion-flor-detalles { bottom: -20px; left: -20px; width: 130px; transform: scaleX(-1) rotate(10deg); }
+
+@media (max-width: 480px) {
+    .decoracion-flor { width: 90px; }
+    .decoracion-flor-portada { width: 110px; }
+}
+
+/* Línea decorada y rombo (se usan en fecha y en los títulos) */
+.linea-decorada {
     position: relative;
+    width: 70px;
+    height: 10px;
+}
+
+.linea-decorada::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 6px;
+    right: 6px;
+    height: 1px;
+    background-color: var(--color-secundario);
+    transform: translateY(-50%);
+}
+
+.linea-decorada::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 6px;
+    border-top: 1px solid var(--color-secundario);
+    border-radius: 50%;
+    transform: translateY(-50%) scaleY(0.6);
+    opacity: 0.6;
+}
+
+.rombo-mini {
+    width: 7px;
+    height: 7px;
+    background-color: var(--color-acento);
+    transform: rotate(45deg);
+    flex-shrink: 0;
+}
+
+/* Divisor bajo los títulos de sección */
+.divisor-floral {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-bottom: 2rem;
+    color: var(--color-secundario);
+}
+
+.divisor-floral-claro .linea-decorada::before,
+.divisor-floral-claro .linea-decorada::after {
+    background-color: rgba(255, 255, 255, 0.6);
+    border-color: rgba(255, 255, 255, 0.6);
+}
+
+.divisor-floral-claro .rombo-mini { background-color: white; }
+
+
+/* ===== 5.1 PORTADA ===== */
+#portada {
     color: white;
     padding-bottom: 6rem;
 }
@@ -321,11 +425,7 @@ img {
     margin-bottom: 1rem;
 }
 
-.nombre-novios {
-    font-family: var(--fuente-titulo);
-    font-size: 3.2rem;
-    line-height: 1.1;
-}
+.nombre-novios { line-height: 1.1; }
 
 .ampersand {
     display: block;
@@ -344,13 +444,8 @@ img {
     opacity: 0.9;
 }
 
-@media (max-width: 400px) {
-    .nombre-novios { font-size: 2.4rem; }
-}
 
-/* ===== FECHA + COUNTDOWN ===== */
-#fecha { position: relative; }
-
+/* ===== 5.2 FECHA + COUNTDOWN ===== */
 .fecha-etiqueta {
     display: flex;
     flex-direction: column;
@@ -367,45 +462,6 @@ img {
     letter-spacing: 3px;
     text-transform: uppercase;
     color: var(--color-primario);
-}
-
-/* Línea decorada reutilizable: línea con puntas curvas a cada extremo */
-.linea-decorada {
-    position: relative;
-    width: 70px;
-    height: 10px;
-}
-
-.linea-decorada::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 6px;
-    right: 6px;
-    height: 1px;
-    background-color: var(--color-secundario);
-    transform: translateY(-50%);
-}
-
-.linea-decorada::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    height: 6px;
-    border-top: 1px solid var(--color-secundario);
-    border-radius: 50%;
-    transform: translateY(-50%) scaleY(0.6);
-    opacity: 0.6;
-}
-
-.rombo-mini {
-    width: 7px;
-    height: 7px;
-    background-color: var(--color-acento);
-    transform: rotate(45deg);
-    flex-shrink: 0;
 }
 
 .fecha-oval {
@@ -449,51 +505,9 @@ img {
     align-items: center;
     justify-content: center;
     gap: 0.8rem;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+    margin: 2rem 0;
 }
 
-/* Divisor floral reutilizable para títulos de sección */
-.divisor-floral {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.6rem;
-    margin-bottom: 2rem;
-    color: var(--color-secundario);
-}
-
-.divisor-floral .linea-decorada::before,
-.divisor-floral .linea-decorada::after {
-    background-color: var(--color-secundario);
-    border-color: var(--color-secundario);
-}
-
-.divisor-floral-claro .linea-decorada::before,
-.divisor-floral-claro .linea-decorada::after {
-    background-color: rgba(255, 255, 255, 0.6);
-    border-color: rgba(255, 255, 255, 0.6);
-}
-
-.divisor-floral-claro .rombo-mini { background-color: white; }
-
-
-.btn-agendar {
-    display: inline-block;
-    margin-top: 2rem;
-    padding: 0.8rem 1.8rem;
-    background-color: var(--color-acento);
-    color: white;
-    text-decoration: none;
-    border-radius: 6px;
-    font-size: 0.9rem;
-    letter-spacing: 1px;
-    transition: background-color 0.2s ease;
-}
-
-.btn-agendar:hover { background-color: var(--color-primario); color: white; }
-
-/* ===== COUNTDOWN ===== */
 .countdown-item {
     display: flex;
     flex-direction: column;
@@ -524,7 +538,23 @@ img {
     .countdown-item small { font-size: 0.7rem; }
 }
 
-/* ===== POLAROIDS FLOTANTES ===== */
+.btn-agendar {
+    display: inline-block;
+    margin-top: 2rem;
+    padding: 0.8rem 1.8rem;
+    background-color: var(--color-acento);
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    transition: background-color 0.2s ease;
+}
+
+.btn-agendar:hover { background-color: var(--color-primario); color: white; }
+
+
+/* ===== 5.3 HISTORIA / MENSAJE (con polaroids) ===== */
 .polaroid {
     position: absolute;
     background-color: white;
@@ -545,8 +575,6 @@ img {
 .polaroid-1 { top: 8%; left: 4%; transform: rotate(-8deg); }
 .polaroid-2 { bottom: 8%; right: 4%; transform: rotate(6deg); }
 
-.historia-texto { position: relative; z-index: 1; max-width: 500px; }
-
 @media (min-width: 576px) {
     .polaroid { width: 180px; padding: 12px 12px 40px 12px; }
     .polaroid img { height: 180px; }
@@ -559,7 +587,6 @@ img {
     .polaroid-2 { bottom: 4%; right: 2%; }
 }
 
-/* ===== MENSAJE DE LOS NOVIOS ===== */
 .comillas {
     font-family: var(--fuente-titulo);
     font-size: 4rem;
@@ -584,11 +611,9 @@ img {
     color: var(--color-primario);
 }
 
-/* ===== ITINERARIO INTERCALADO CON FOTO DE FONDO ===== */
-.itinerario-seccion {
-    position: relative;
-    color: white;
-}
+
+/* ===== 5.4 ITINERARIO (foto de fondo + curva central) ===== */
+.itinerario-seccion { color: white; }
 
 .itinerario-fondo {
     position: absolute;
@@ -603,22 +628,18 @@ img {
     position: absolute;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    background-color: rgba(63, 74, 64, 0.82); /* --color-oscuro semi-transparente */
+    background-color: rgba(63, 74, 64, 0.82); /* --color-oscuro semitransparente */
     z-index: 1;
 }
 
 .itinerario-contenido { position: relative; z-index: 2; }
 
-.titulo-script {
-    font-family: 'Great Vibes', cursive;
-    font-weight: 400;
-    font-size: 3rem;
-    margin-bottom: 2.5rem;
-}
-
 .itinerario-vertical {
+    --ancho-linea: 60px; /* ancho de la columna central (la curva) */
+
     display: flex;
     flex-direction: column;
+    width: 100%;
     max-width: 480px;
     position: relative;
 }
@@ -628,15 +649,16 @@ img {
     top: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 60px;
+    width: var(--ancho-linea);
     height: 100%;
     color: rgba(255, 255, 255, 0.55);
     z-index: 0;
 }
 
+/* Siempre 3 columnas: lado | curva | lado (también en celular) */
 .itinerario-item {
     display: grid;
-    grid-template-columns: 1fr 60px 1fr;
+    grid-template-columns: 1fr var(--ancho-linea) 1fr;
     align-items: center;
     padding: 1.6rem 0;
     position: relative;
@@ -673,66 +695,25 @@ img {
     opacity: 0.85;
 }
 
-/* En mobile angosto: colapsa a una columna, ícono siempre a la izquierda de su texto */
 @media (max-width: 480px) {
-    .itinerario-item {
-        grid-template-columns: 50px 1fr;
-        column-gap: 1rem;
-        padding: 1.2rem 0;
-    }
-    .itinerario-linea { left: 25px; width: 40px; }
-
-    .itinerario-icono-izq .itinerario-icono-wrap,
-    .itinerario-icono-der .itinerario-icono-wrap {
-        grid-column: 1;
-        justify-self: center;
-    }
-    .itinerario-icono-izq .itinerario-texto,
-    .itinerario-icono-der .itinerario-texto {
-        grid-column: 2;
-        justify-self: start;
-        text-align: left;
-    }
-    .itinerario-espaciador { display: none; }
+    .itinerario-vertical { --ancho-linea: 44px; }
+    .itinerario-item { column-gap: 0.4rem; padding: 1.3rem 0; }
+    .itinerario-icono { width: 40px; height: 40px; padding: 8px; }
+    .itinerario-texto h3 { font-size: 0.95rem; }
+    .itinerario-texto p { font-size: 0.78rem; }
 }
 
-/* ===== ANIMACIÓN CONTINUA DE LOS SVG (independiente de la aparición del contenedor) ===== */
-.svg-latido {
-    animation: latido-icono 2.6s ease-in-out infinite;
-    transform-origin: center;
+
+/* ===== 5.5 DETALLES + DRESS CODE ===== */
+.detalles-nota-lugar {
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--color-primario);
+    opacity: 0.8;
+    margin-bottom: 1.5rem;
 }
 
-@keyframes latido-icono {
-    0%, 100% { transform: scale(1); }
-    50%      { transform: scale(1.1); }
-}
-
-/* Contenedores genéricos de ícono (detalles, dresscode, regalo) que reciben la animación de aparición */
-.icono-wrap,
-.itinerario-icono-wrap {
-    display: inline-flex;
-}
-
-/* ===== FLOR OSCILANTE DE FONDO (baja opacidad, reutilizada en cada sección) ===== */
-.flor-oscilante {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 380px;
-    max-width: 70%;
-    opacity: 0.1;
-    z-index: 0;
-    pointer-events: none;
-    animation: oscilar-flor 7s ease-in-out infinite;
-}
-
-@keyframes oscilar-flor {
-    0%   { transform: translate(-50%, -50%) translateY(0) rotate(0deg); }
-    50%  { transform: translate(-50%, -50%) translateY(-18px) rotate(3deg); }
-    100% { transform: translate(-50%, -50%) translateY(0) rotate(0deg); }
-}
-
-/* ===== DETALLES: CEREMONIA / RECEPCIÓN ===== */
 .detalles-row { margin-bottom: 2rem; }
 
 .detalles-col {
@@ -758,6 +739,17 @@ img {
     font-weight: 600;
     color: var(--color-primario);
     margin-bottom: 0.4rem;
+}
+
+.lugar-compartido {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.lugar-compartido-nombre {
+    font-family: var(--fuente-titulo);
+    font-size: 1.2rem;
+    margin-bottom: 0.2rem;
 }
 
 .btn-ubicacion {
@@ -790,7 +782,6 @@ img {
 
 .mapa-embebido iframe { display: block; width: 100%; }
 
-/* ===== DRESS CODE ===== */
 .dresscode-bloque { width: 100%; }
 
 .dresscode-grid { max-width: 400px; margin: 0 auto 1.5rem auto; }
@@ -835,9 +826,7 @@ img {
     border: 1px solid rgba(0, 0, 0, 0.15);
 }
 
-.color-chip-tachado {
-    position: relative;
-}
+.color-chip-tachado { position: relative; }
 
 .color-chip-tachado::after {
     content: '';
@@ -860,7 +849,8 @@ img {
     display: inline-block;
 }
 
-/* ===== SUGERENCIA DE REGALO ===== */
+
+/* ===== 5.6 SUGERENCIA DE REGALO ===== */
 .regalo-icono {
     width: 48px;
     height: 48px;
@@ -892,7 +882,8 @@ img {
 
 .regalo-card-icono { width: 60px; height: 60px; }
 
-/* ===== GALERÍA ===== */
+
+/* ===== 5.7 GALERÍA ===== */
 .img-galeria {
     width: 100%;
     height: 160px;
@@ -905,7 +896,8 @@ img {
     .img-galeria { height: 220px; }
 }
 
-/* ===== FORMULARIO RSVP ===== */
+
+/* ===== 5.8 RSVP ===== */
 .rsvp-mensaje {
     font-size: 0.85rem;
     letter-spacing: 0.5px;
@@ -962,7 +954,7 @@ img {
 .mensaje-rsvp.exito { color: white; font-weight: 600; }
 .mensaje-rsvp.error { color: #F2B8B0; }
 
-/* ===== MODAL DE AGRADECIMIENTO ===== */
+/* Modal de agradecimiento */
 .modal-gracias-content {
     border: none;
     border-radius: 12px;
@@ -980,7 +972,8 @@ img {
 
 .modal-gracias-content p { font-size: 0.95rem; opacity: 0.85; }
 
-/* ===== BOTÓN DE MÚSICA ===== */
+
+/* ===== 6. BOTÓN DE MÚSICA ===== */
 .btn-musica {
     position: fixed;
     bottom: 20px;
@@ -1001,28 +994,3 @@ img {
 }
 
 .btn-musica.visible { display: flex; }
-
-.tarjeta-sobre {
-    position: relative;
-    width: min(520px, 85vw);
-    aspect-ratio: 3 / 2;
-    background-color: rgba(255, 255, 255, 0.06);
-    border: 1.5px solid rgba(255, 255, 255, 0.5);
-    border-radius: 1px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-}
-
-.solapa-sobre {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 0;
-    border-left: calc(min(520px, 85vw) / 2) solid transparent;
-    border-right: calc(min(520px, 85vw) / 2) solid transparent;
-    border-top: calc(min(520px, 85vw) * 0.2115) solid rgba(255, 255, 255, 0.08);
-}
