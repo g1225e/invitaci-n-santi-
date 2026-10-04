@@ -192,8 +192,24 @@ img {
 }
 
 @media (max-width: 480px) {
-    .decoracion-flor { width: 90px; }
-    .decoracion-flor-portada { width: 110px; }
+    .itinerario-vertical { width: 100%; }
+
+    .itinerario-item {
+        grid-template-columns: 1fr 44px 1fr;
+        column-gap: 0.4rem;
+        padding: 1.3rem 0;
+    }
+
+    .itinerario-linea { width: 44px; }
+
+    .itinerario-icono {
+        width: 40px;
+        height: 40px;
+        padding: 8px;
+    }
+
+    .itinerario-texto h3 { font-size: 0.95rem; }
+    .itinerario-texto p { font-size: 0.78rem; }
 }
 
 /* ===== NOTA DE LUGAR COMPARTIDO ===== */
